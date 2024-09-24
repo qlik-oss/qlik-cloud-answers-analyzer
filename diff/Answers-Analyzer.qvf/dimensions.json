@@ -1,0 +1,2047 @@
+[
+  {
+    "qInfo": {
+      "qId": "TWFpXxv",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "DocumentIsReferenced"
+      ],
+      "qFieldLabels": [
+        "Document Is Referenced"
+      ],
+      "qAlias": "Document Is Referenced",
+      "title": "Document Is Referenced",
+      "coloring": {
+        "changeHash": "0.7044015992721022",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Document Is Referenced",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "sLmgAUE",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "=KnowledgeBaseDataSourceNameUnique"
+      ],
+      "qFieldLabels": [
+        "Knowledgebase Data Source Name"
+      ],
+      "qAlias": "Knowledgebase Data Source Name",
+      "title": "Knowledgebase Data Source Name",
+      "coloring": {
+        "changeHash": "0.1001896092824821",
+        "hasValueColors": false,
+        "colorMapRef": "sLmgAUE"
+      }
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Data Source Name",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "356639a0-8e17-4484-89d9-04cd52d67871",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "=KnowledgeBaseDataSourceConnectionNameUnique"
+      ],
+      "qFieldLabels": [
+        "Knowledgebase Data Source Connection Name"
+      ],
+      "qAlias": "Knowledgebase Data Source Connection Name",
+      "title": "Knowledgebase Data Source Connection Name",
+      "coloring": {
+        "colorMapRef": "356639a0-8e17-4484-89d9-04cd52d67871",
+        "changeHash": "0.22440887600721182",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Data Source Connection Name",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "50fd983b-e253-4fd6-8554-5d143adca33e",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "KnowledgeBaseDataSourceCrawlPatternType"
+      ],
+      "qFieldLabels": [
+        "Knowledgebase Data Source Crawl Pattern Type"
+      ],
+      "qAlias": "Knowledgebase Data Source Crawl Pattern Type",
+      "title": "Knowledgebase Data Source Crawl Pattern Type",
+      "coloring": {
+        "colorMapRef": "YKNuxj",
+        "changeHash": "0.35745574847059913",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Data Source Crawl Pattern Type",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "YKNuxj",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "KnowledgeBaseDataSourceCrawlPattern"
+      ],
+      "qFieldLabels": [
+        "Knowledgebase Data Source Crawl Pattern"
+      ],
+      "qAlias": "Knowledgebase Data Source Crawl Pattern",
+      "title": "Knowledgebase Data Source Crawl Pattern",
+      "coloring": {
+        "changeHash": "0.5968918702123531",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Data Source Crawl Pattern",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "59dc5e17-de78-4f2f-a63b-25e9a6835a49",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "=KnowledgeBaseDataSourceID"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Data Source ID"
+      ],
+      "qAlias": "Thread Interaction Data Source ID",
+      "title": "Thread Interaction Data Source ID",
+      "coloring": {
+        "colorMapRef": "59dc5e17-de78-4f2f-a63b-25e9a6835a49",
+        "changeHash": "0.18990931945779344",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Data Source ID",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "085be9ca-6841-44bf-bbc0-29d20f47038b",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "=KnowledgeBaseNameUnique"
+      ],
+      "qFieldLabels": [
+        "Knowledgebase Name"
+      ],
+      "qAlias": "Knowledgebase Name",
+      "title": "Knowledgebase Name",
+      "coloring": {
+        "colorMapRef": "085be9ca-6841-44bf-bbc0-29d20f47038b",
+        "changeHash": "0.7271580367919439",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Name",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "3f457d7c-96d7-4a96-8650-e381d8bb1039",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "=AssistantNameUnique"
+      ],
+      "qFieldLabels": [
+        "Assistant Name"
+      ],
+      "qAlias": "Assistant Name",
+      "title": "Assistant Name",
+      "coloring": {
+        "colorMapRef": "3f457d7c-96d7-4a96-8650-e381d8bb1039",
+        "changeHash": "0.9949409624167378",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Assistant Name",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "PCKqDv",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "H",
+      "qFieldDefs": [
+        "ThreadInteractionMonthYear",
+        "ThreadInteractionDay",
+        "ThreadInteractionHourAMPM"
+      ],
+      "qFieldLabels": [
+        "Month Year",
+        "Day of Month",
+        "Hour"
+      ],
+      "qAlias": "MonthYear / Day of Month",
+      "title": "MonthYear / Day of Month",
+      "coloring": {
+        "changeHash": "0.22027918434876326",
+        "hasValueColors": false,
+        "colorMapRef": "PCKqDv"
+      }
+    },
+    "qMetaDef": {
+      "title": "MonthYear / Day of Month",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "fUCEVFM",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionFeedbackVote"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Feedback Vote"
+      ],
+      "qAlias": "Thread Interaction Feedback Vote",
+      "title": "Thread Interaction Feedback Vote",
+      "coloring": {
+        "changeHash": "0.211976986279101",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Feedback Vote",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "jAspj",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionMonthYear"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Month Year"
+      ],
+      "qAlias": "Thread Interaction Month Year",
+      "title": "Thread Interaction Month Year",
+      "coloring": {
+        "changeHash": "0.9557344539346908",
+        "hasValueColors": false,
+        "colorMapRef": "jAspj"
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Month Year",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "c3155aa8-922d-4b72-84bd-290fd394528c",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "AssistantSpaceType"
+      ],
+      "qFieldLabels": [
+        "Assistant Space Type"
+      ],
+      "qAlias": "Assistant Space Type",
+      "title": "Assistant Space Type",
+      "coloring": {
+        "colorMapRef": "BBSAmK",
+        "changeHash": "0.9287996328724186",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Assistant Space Type",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "BBSAmK",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "AssistantSpaceName"
+      ],
+      "qFieldLabels": [
+        "Assistant Space Name"
+      ],
+      "qAlias": "Assistant Space Name",
+      "title": "Assistant Space Name",
+      "coloring": {
+        "changeHash": "0.186605387374714",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Assistant Space Name",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "b8b62e71-ed65-4cf7-8ab7-77afdd35e047",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "KnowledgeBaseSpaceType"
+      ],
+      "qFieldLabels": [
+        "Knowledgebase Space Type"
+      ],
+      "qAlias": "Knowledgebase Space Type",
+      "title": "Knowledgebase Space Type",
+      "coloring": {
+        "colorMapRef": "YkPLL",
+        "changeHash": "0.027547157643400988",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Space Type",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "YkPLL",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "KnowledgeBaseSpaceName"
+      ],
+      "qFieldLabels": [
+        "Knowledgebase Space Name"
+      ],
+      "qAlias": "Knowledgebase Space Name",
+      "title": "Knowledgebase Space Name",
+      "coloring": {
+        "changeHash": "0.31399695134260996",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Space Name",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "KNXfzuu",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionHasSources"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Has Sources"
+      ],
+      "qAlias": "Thread Interaction Has Sources",
+      "title": "Thread Interaction Has Sources",
+      "coloring": {
+        "changeHash": "0.2636637533909143",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Has Sources",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "RgJyjdX",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "KnowledgeBaseDataSourceID"
+      ],
+      "qFieldLabels": [
+        "Knowledge Base Data Source ID"
+      ],
+      "qAlias": "Knowledge Base Data Source ID",
+      "title": "Knowledge Base Data Source ID",
+      "coloring": {
+        "changeHash": "0.120966502229505",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Knowledge Base Data Source ID",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "SedLY",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "KnowledgeBaseDataSourceUserName"
+      ],
+      "qFieldLabels": [
+        "Knowledgebase Data Source User Name"
+      ],
+      "qAlias": "Knowledgebase Data Source User Name",
+      "title": "Knowledgebase Data Source User Name",
+      "coloring": {
+        "changeHash": "0.5773795840965612",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Data Source User Name",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "7e2e8dc9-bc97-4949-93c7-e2ab6de58724",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadUpdatedTime"
+      ],
+      "qFieldLabels": [
+        "Thread Updated Time"
+      ],
+      "qAlias": "Thread Updated Time",
+      "title": "Thread Updated Time",
+      "coloring": {
+        "colorMapRef": "jfTrSSe",
+        "changeHash": "0.12168461453934509",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Updated Time",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "3c1ef0cd-a62d-44ae-965f-12512ff733b9",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadOwnerName"
+      ],
+      "qFieldLabels": [
+        "Thread Owner Name"
+      ],
+      "qAlias": "Thread Owner Name",
+      "title": "Thread Owner Name",
+      "coloring": {
+        "colorMapRef": "jfTrSSe",
+        "changeHash": "0.6782787282415585",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Owner Name",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "ed75f9e5-3a7a-4b08-af19-b016a85dffbf",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadOwnerID"
+      ],
+      "qFieldLabels": [
+        "Thread Owner ID"
+      ],
+      "qAlias": "Thread Owner ID",
+      "title": "Thread Owner ID",
+      "coloring": {
+        "colorMapRef": "jfTrSSe",
+        "changeHash": "0.20866205342372113",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Owner ID",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "7405d539-fa46-44e4-a922-1f6c826446e2",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadName"
+      ],
+      "qFieldLabels": [
+        "Thread Name"
+      ],
+      "qAlias": "Thread Name",
+      "title": "Thread Name",
+      "coloring": {
+        "colorMapRef": "jfTrSSe",
+        "changeHash": "0.7710943176427121",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Name",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "0780b45a-bdec-4fe9-9431-4cd1cc0fb922",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionYear"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Year"
+      ],
+      "qAlias": "Thread Interaction Year",
+      "title": "Thread Interaction Year",
+      "coloring": {
+        "colorMapRef": "jfTrSSe",
+        "changeHash": "0.8579711398424594",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Year",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "378cb881-1764-482a-91c7-bba6b823d7eb",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionWeekStart"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Week Start"
+      ],
+      "qAlias": "Thread Interaction Week Start",
+      "title": "Thread Interaction Week Start",
+      "coloring": {
+        "colorMapRef": "jfTrSSe",
+        "changeHash": "0.9099367631886397",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Week Start",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "7eed0e68-ec5c-404d-bf5e-1c22e06f7f6e",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionWeek"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Week"
+      ],
+      "qAlias": "Thread Interaction Week",
+      "title": "Thread Interaction Week",
+      "coloring": {
+        "colorMapRef": "jfTrSSe",
+        "changeHash": "0.6331600137686004",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Week",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "c88e98cc-1ab6-4a63-92ae-b7cddbcdb073",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionUpdatedTime"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Updated Time"
+      ],
+      "qAlias": "Thread Interaction Updated Time",
+      "title": "Thread Interaction Updated Time",
+      "coloring": {
+        "colorMapRef": "jfTrSSe",
+        "changeHash": "0.5207239553400298",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Updated Time",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "4fb578cf-7d10-4d6b-b513-58e014ccfdfe",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionUpdatedDate"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Updated Date"
+      ],
+      "qAlias": "Thread Interaction Updated Date",
+      "title": "Thread Interaction Updated Date",
+      "coloring": {
+        "colorMapRef": "jfTrSSe",
+        "changeHash": "0.060456786791980965",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Updated Date",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "4a147f5c-81ec-458e-8528-1426aa32d183",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionTimeframe"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Timeframe"
+      ],
+      "qAlias": "Thread Interaction Timeframe",
+      "title": "Thread Interaction Timeframe",
+      "coloring": {
+        "colorMapRef": "jfTrSSe",
+        "changeHash": "0.6601952406716594",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Timeframe",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "d1ec4c41-be97-47e8-b59e-fae515b9d4be",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionTime"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Time"
+      ],
+      "qAlias": "Thread Interaction Time",
+      "title": "Thread Interaction Time",
+      "coloring": {
+        "colorMapRef": "jfTrSSe",
+        "changeHash": "0.9353535977270777",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Time",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "a2f55eca-3bac-401c-9f50-6e983dde5050",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionSourceLastIndexedTime"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Source Last Indexed Time"
+      ],
+      "qAlias": "Thread Interaction Source Last Indexed Time",
+      "title": "Thread Interaction Source Last Indexed Time",
+      "coloring": {
+        "colorMapRef": "jfTrSSe",
+        "changeHash": "0.3345628117642807",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Source Last Indexed Time",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "ee38fecc-8403-4536-a802-ebe44cf684ec",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionSource"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Source"
+      ],
+      "qAlias": "Thread Interaction Source",
+      "title": "Thread Interaction Source",
+      "coloring": {
+        "colorMapRef": "jfTrSSe",
+        "changeHash": "0.08937219653716766",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Source",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "e9468abf-558d-4166-b3c1-e7f806c83d3e",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionQuestion"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Question"
+      ],
+      "qAlias": "Thread Interaction Question",
+      "title": "Thread Interaction Question",
+      "coloring": {
+        "colorMapRef": "jfTrSSe",
+        "changeHash": "0.016522884921515546",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Question",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "jfTrSSe",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionMonth"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Month"
+      ],
+      "qAlias": "Thread Interaction Month",
+      "title": "Thread Interaction Month",
+      "coloring": {
+        "changeHash": "0.2711301808150737",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Month",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "f3b8bb0d-3694-4c27-84cf-131e7bf94a7e",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionFeedbackStatus"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Feedback Status"
+      ],
+      "qAlias": "Thread Interaction Feedback Status",
+      "title": "Thread Interaction Feedback Status",
+      "coloring": {
+        "colorMapRef": "f3b8bb0d-3694-4c27-84cf-131e7bf94a7e",
+        "changeHash": "0.6083082108067723",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Feedback Status",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "eeb5a9d0-2aab-427a-8d92-91e12d51ae86",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionFeedbackReviewerName"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Feedback Reviewer Name"
+      ],
+      "qAlias": "Thread Interaction Feedback Reviewer Name",
+      "title": "Thread Interaction Feedback Reviewer Name",
+      "coloring": {
+        "colorMapRef": "eeb5a9d0-2aab-427a-8d92-91e12d51ae86",
+        "changeHash": "0.07453994378373041",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Feedback Reviewer Name",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "32ab7748-c809-4869-b429-44617f2eebff",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionFeedbackReviewerID"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Feedback Reviewer ID"
+      ],
+      "qAlias": "Thread Interaction Feedback Reviewer ID",
+      "title": "Thread Interaction Feedback Reviewer ID",
+      "coloring": {
+        "colorMapRef": "32ab7748-c809-4869-b429-44617f2eebff",
+        "changeHash": "0.5899894243810146",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Feedback Reviewer ID",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "sDGyRA",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionFeedbackReviewedTime"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Feedback Reviewed Time"
+      ],
+      "qAlias": "Thread Interaction Feedback Reviewed Time",
+      "title": "Thread Interaction Feedback Reviewed Time",
+      "coloring": {
+        "changeHash": "0.8534142801306903",
+        "hasValueColors": false,
+        "colorMapRef": "sDGyRA"
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Feedback Reviewed Time",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "5a95a665-0685-4634-9bf0-40901baa3fd4",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionFeedbackReason"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Feedback Reason"
+      ],
+      "qAlias": "Thread Interaction Feedback Reason",
+      "title": "Thread Interaction Feedback Reason",
+      "coloring": {
+        "colorMapRef": "5a95a665-0685-4634-9bf0-40901baa3fd4",
+        "changeHash": "0.2975078273675693",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Feedback Reason",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "b1964feb-168d-4540-9152-a073a98204fd",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionFeedbackID"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Feedback ID"
+      ],
+      "qAlias": "Thread Interaction Feedback ID",
+      "title": "Thread Interaction Feedback ID",
+      "coloring": {
+        "colorMapRef": "b1964feb-168d-4540-9152-a073a98204fd",
+        "changeHash": "0.30414974072170264",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Feedback ID",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "8a4f2b96-e486-4040-a5bc-507611607133",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionDocumentID"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Document ID"
+      ],
+      "qAlias": "Thread Interaction Document ID",
+      "title": "Thread Interaction Document ID",
+      "coloring": {
+        "colorMapRef": "8a4f2b96-e486-4040-a5bc-507611607133",
+        "changeHash": "0.5453087084289951",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Document ID",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "88a1969d-4c39-4f76-92d0-0bcc2c54615d",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionDay"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Day"
+      ],
+      "qAlias": "Thread Interaction Day",
+      "title": "Thread Interaction Day",
+      "coloring": {
+        "colorMapRef": "88a1969d-4c39-4f76-92d0-0bcc2c54615d",
+        "changeHash": "0.20696348881922022",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Day",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "0d9eac53-2bfb-4be3-8546-f457e90b4a2c",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionDate"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Date"
+      ],
+      "qAlias": "Thread Interaction Date",
+      "title": "Thread Interaction Date",
+      "coloring": {
+        "colorMapRef": "0d9eac53-2bfb-4be3-8546-f457e90b4a2c",
+        "changeHash": "0.2542183722077149",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Date",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "XHmvSr",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadCreatedTime"
+      ],
+      "qFieldLabels": [
+        "Thread Created Time"
+      ],
+      "qAlias": "Thread Created Time",
+      "title": "Thread Created Time",
+      "coloring": {
+        "changeHash": "0.8841153387462493",
+        "hasValueColors": false,
+        "colorMapRef": "XHmvSr"
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Created Time",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "4c8a4b75-5e26-43b8-96cf-68f74289c222",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionFeedbackComment"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Comment"
+      ],
+      "qAlias": "Thread Interaction Comment",
+      "title": "Thread Interaction Comment",
+      "coloring": {
+        "colorMapRef": "4c8a4b75-5e26-43b8-96cf-68f74289c222",
+        "changeHash": "0.5675833784690401",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Comment",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "c3d5085b-ca12-47ee-aa5f-f07af146c919",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionChunkID"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Chunk ID"
+      ],
+      "qAlias": "Thread Interaction Chunk ID",
+      "title": "Thread Interaction Chunk ID",
+      "coloring": {
+        "colorMapRef": "c3d5085b-ca12-47ee-aa5f-f07af146c919",
+        "changeHash": "0.45311693432574307",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Chunk ID",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "d33a7b3c-d9d8-4b01-9881-d27a64a5eaf4",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionAnswer"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction Answer"
+      ],
+      "qAlias": "Thread Interaction Answer",
+      "title": "Thread Interaction Answer",
+      "coloring": {
+        "colorMapRef": "d33a7b3c-d9d8-4b01-9881-d27a64a5eaf4",
+        "changeHash": "0.6037848407825182",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction Answer",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "684596ef-ae8e-47e7-8e2e-879b20d54a3f",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadInteractionID"
+      ],
+      "qFieldLabels": [
+        "Thread Interaction ID"
+      ],
+      "qAlias": "Thread Interaction ID",
+      "title": "Thread Interaction ID",
+      "coloring": {
+        "colorMapRef": "sDGyRA",
+        "changeHash": "0.7439938482577613",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread Interaction ID",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "cdc9893f-2cfa-481c-86ce-f914e27e04ab",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "ThreadID"
+      ],
+      "qFieldLabels": [
+        "Thread ID"
+      ],
+      "qAlias": "Thread ID",
+      "title": "Thread ID",
+      "coloring": {
+        "colorMapRef": "XHmvSr",
+        "changeHash": "0.7084470093050828",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Thread ID",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "81175387-bfc1-43bd-9174-c5f5ac9b5880",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "KnowledgeBaseOwnerID"
+      ],
+      "qFieldLabels": [
+        "Knowledgebase Owner ID"
+      ],
+      "qAlias": "Knowledgebase Owner ID",
+      "title": "Knowledgebase Owner ID",
+      "coloring": {
+        "colorMapRef": "sRtQXE",
+        "changeHash": "0.5049204018508828",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Owner ID",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "92683bf1-f509-4e07-9397-b305dc5b2777",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "KnowledgeBaseOwnerName"
+      ],
+      "qFieldLabels": [
+        "Knowledgebase Owner Name"
+      ],
+      "qAlias": "Knowledgebase Owner Name",
+      "title": "Knowledgebase Owner Name",
+      "coloring": {
+        "colorMapRef": "sRtQXE",
+        "changeHash": "0.6992991086584457",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Owner Name",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "da5675b6-9718-4302-87ff-2d1b3f27b38d",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "KnowledgeBaseLastIndexedTime"
+      ],
+      "qFieldLabels": [
+        "Knowledgebase Last Indexed Time"
+      ],
+      "qAlias": "Knowledgebase Last Indexed Time",
+      "title": "Knowledgebase Last Indexed Time",
+      "coloring": {
+        "colorMapRef": "sRtQXE",
+        "changeHash": "0.7934851595683381",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Last Indexed Time",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "95fce5aa-555c-42fd-8324-792f6f6dec84",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "KnowledgeBaseID"
+      ],
+      "qFieldLabels": [
+        "Knowledgebase ID"
+      ],
+      "qAlias": "Knowledgebase ID",
+      "title": "Knowledgebase ID",
+      "coloring": {
+        "colorMapRef": "sRtQXE",
+        "changeHash": "0.07130471966109497",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase ID",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "e3660b3b-c630-4df5-aab9-2ca713f744ca",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "KnowledgeBaseDescription"
+      ],
+      "qFieldLabels": [
+        "Knowledgebase Description"
+      ],
+      "qAlias": "Knowledgebase Description",
+      "title": "Knowledgebase Description",
+      "coloring": {
+        "colorMapRef": "sRtQXE",
+        "changeHash": "0.17374067259540227",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Description",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "1bee1450-a84f-4aac-9f6e-870e02004c9d",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "KnowledgeBaseDataSourceLastSyncStatus"
+      ],
+      "qFieldLabels": [
+        "Knowledgebase Data Source Last Sync Status"
+      ],
+      "qAlias": "Knowledgebase Data Source Last Sync Status",
+      "title": "Knowledgebase Data Source Last Sync Status",
+      "coloring": {
+        "colorMapRef": "sRtQXE",
+        "changeHash": "0.41119716879123414",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Data Source Last Sync Status",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "48a1d6fc-30b9-4863-90ff-955cb3b02296",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "KnowledgeBaseDataSourceLastSyncCompletedAt"
+      ],
+      "qFieldLabels": [
+        "Knowledgebase Data Source Last Sync Time"
+      ],
+      "qAlias": "Knowledgebase Data Source Last Sync Time",
+      "title": "Knowledgebase Data Source Last Sync Time",
+      "coloring": {
+        "colorMapRef": "sRtQXE",
+        "changeHash": "0.1263803055744579",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Data Source Last Sync Time",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "8a779dd9-7310-45f5-9d4a-8b075110b3b0",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "KnowledgeBaseDataSourceFolder"
+      ],
+      "qFieldLabels": [
+        "Knowledgebase Data Source Folder"
+      ],
+      "qAlias": "Knowledgebase Data Source Folder",
+      "title": "Knowledgebase Data Source Folder",
+      "coloring": {
+        "colorMapRef": "sRtQXE",
+        "changeHash": "0.5822046164811328",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Data Source Folder",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "7c414d95-858f-4bd5-8a70-73f668e48a80",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "KnowledgeBaseDataSourceConnectionSpaceType"
+      ],
+      "qFieldLabels": [
+        "Knowledgebase Data Source Connection Space Type"
+      ],
+      "qAlias": "Knowledgebase Data Source Connection Space Type",
+      "title": "Knowledgebase Data Source Connection Space Type",
+      "coloring": {
+        "colorMapRef": "sRtQXE",
+        "changeHash": "0.38659399678394",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Data Source Connection Space Type",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "9d85ddfa-4c37-4a47-90b0-e2b062ef9422",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "KnowledgeBaseDataSourceConnectionSpaceName"
+      ],
+      "qFieldLabels": [
+        "Knowledgebase Data Source Connection Space Name"
+      ],
+      "qAlias": "Knowledgebase Data Source Connection Space Name",
+      "title": "Knowledgebase Data Source Connection Space Name",
+      "coloring": {
+        "colorMapRef": "sRtQXE",
+        "changeHash": "0.7278145273593386",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Data Source Connection Space Name",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "dc77972e-fe5f-4135-a2f6-b7a28c5f7457",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "KnowledgeBaseDataSourceConnectionID"
+      ],
+      "qFieldLabels": [
+        "Knowledgebase Data Source Connection ID"
+      ],
+      "qAlias": "Knowledgebase Data Source Connection ID",
+      "title": "Knowledgebase Data Source Connection ID",
+      "coloring": {
+        "colorMapRef": "sRtQXE",
+        "changeHash": "0.8445163841811962",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Data Source Connection ID",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "f4f17bed-8aee-45c1-9861-4551728238d3",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "KnowledgeBaseCreatedTime"
+      ],
+      "qFieldLabels": [
+        "Knowledgebase Created Time"
+      ],
+      "qAlias": "Knowledgebase Created Time",
+      "title": "Knowledgebase Created Time",
+      "coloring": {
+        "colorMapRef": "sRtQXE",
+        "changeHash": "0.43821599972322667",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Created Time",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "sRtQXE",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "KnowledgeBaseCreatedByUserName"
+      ],
+      "qFieldLabels": [
+        "Knowledgebase Created By User Name"
+      ],
+      "qAlias": "Knowledgebase Created By User Name",
+      "title": "Knowledgebase Created By User Name",
+      "coloring": {
+        "changeHash": "0.00390431009463299",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Created By User Name",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "5129fe1d-050c-4c3e-9a85-5e9659b9b031",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "DocumentLastIndexedTime"
+      ],
+      "qFieldLabels": [
+        "Document Last Indexed"
+      ],
+      "qAlias": "Document Last Indexed",
+      "title": "Document Last Indexed",
+      "coloring": {
+        "colorMapRef": "5129fe1d-050c-4c3e-9a85-5e9659b9b031",
+        "changeHash": "0.6342130437724889",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Document Last Indexed",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "0f712982-d2c1-4faa-8689-8c263f8d32af",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "DocumentLastModifiedTime"
+      ],
+      "qFieldLabels": [
+        "Document Last Modified"
+      ],
+      "qAlias": "Document Last Modified",
+      "title": "Document Last Modified",
+      "coloring": {
+        "colorMapRef": "0f712982-d2c1-4faa-8689-8c263f8d32af",
+        "changeHash": "0.0964653543594336",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Document Last Modified",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "445e69a8-7be3-46ee-bdf8-19c70825f22e",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "AssistantWelcomeMessage"
+      ],
+      "qFieldLabels": [
+        "Assistant Welcome Message"
+      ],
+      "qAlias": "Assistant Welcome Message",
+      "title": "Assistant Welcome Message",
+      "coloring": {
+        "colorMapRef": "NcjkP",
+        "changeHash": "0.08492524008678926",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Assistant Welcome Message",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "c76d7e10-3df9-4ce3-9f18-8a4c73f32261",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "Document"
+      ],
+      "qFieldLabels": [
+        "Document"
+      ],
+      "qAlias": "Document",
+      "title": "Document",
+      "coloring": {
+        "colorMapRef": "NcjkP",
+        "changeHash": "0.27433135434933",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Document",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "a118d62e-0ace-47e4-8d63-5f3401d83e48",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "AssistantUpdatedTime"
+      ],
+      "qFieldLabels": [
+        "Assistant Updated Time"
+      ],
+      "qAlias": "Assistant Updated Time",
+      "title": "Assistant Updated Time",
+      "coloring": {
+        "colorMapRef": "NcjkP",
+        "changeHash": "0.38327542631664824",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Assistant Updated Time",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "78b5377d-8c23-4bd4-a47f-9dfcae88ce14",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "AssistantUpdatedByName"
+      ],
+      "qFieldLabels": [
+        "Assistant Updated By Name"
+      ],
+      "qAlias": "Assistant Updated By Name",
+      "title": "Assistant Updated By Name",
+      "coloring": {
+        "colorMapRef": "NcjkP",
+        "changeHash": "0.9834018069100297",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Assistant Updated By Name",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "4b2708bb-39ce-44ed-a942-9b58eb357f0d",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "AssistantTitle"
+      ],
+      "qFieldLabels": [
+        "Assistant Title"
+      ],
+      "qAlias": "Assistant Title",
+      "title": "Assistant Title",
+      "coloring": {
+        "colorMapRef": "NcjkP",
+        "changeHash": "0.8415452756711481",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Assistant Title",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "758c656c-c498-4b62-a51f-2e3d3309c1ee",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "AssistantTag"
+      ],
+      "qFieldLabels": [
+        "Assistant Tag"
+      ],
+      "qAlias": "Assistant Tag",
+      "title": "Assistant Tag",
+      "coloring": {
+        "colorMapRef": "NcjkP",
+        "changeHash": "0.43528978406554275",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Assistant Tag",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "967c086e-b60a-4112-95fe-c24dc887c6ec",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "AssistantOwnerID"
+      ],
+      "qFieldLabels": [
+        "Assistant Owner ID"
+      ],
+      "qAlias": "Assistant Owner ID",
+      "title": "Assistant Owner ID",
+      "coloring": {
+        "colorMapRef": "NcjkP",
+        "changeHash": "0.8381162308953007",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Assistant Owner ID",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "e4c96264-7ce5-429b-98a6-fc1d0982b69c",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "AssistantSpaceID"
+      ],
+      "qFieldLabels": [
+        "Assistant Space ID"
+      ],
+      "qAlias": "Assistant Space ID",
+      "title": "Assistant Space ID",
+      "coloring": {
+        "colorMapRef": "NcjkP",
+        "changeHash": "0.8927900242903217",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Assistant Space ID",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "5fe86780-4af0-460e-b0ef-1cbdd33dfa32",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "AssistantOwnerName"
+      ],
+      "qFieldLabels": [
+        "Assistant Owner Name"
+      ],
+      "qAlias": "Assistant Owner Name",
+      "title": "Assistant Owner Name",
+      "coloring": {
+        "colorMapRef": "NcjkP",
+        "changeHash": "0.7147763865887824",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Assistant Owner Name",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "50954043-d8d7-445f-a83f-37cd68d5b719",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "AssistantID"
+      ],
+      "qFieldLabels": [
+        "Assistant ID"
+      ],
+      "qAlias": "Assistant ID",
+      "title": "Assistant ID",
+      "coloring": {
+        "colorMapRef": "NcjkP",
+        "changeHash": "0.5190754008013398",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Assistant ID",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "a6ea3697-c458-40b7-a406-7d3f85ca7e32",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "AssistantDescription"
+      ],
+      "qFieldLabels": [
+        "Assistant Description"
+      ],
+      "qAlias": "Assistant Description",
+      "title": "Assistant Description",
+      "coloring": {
+        "colorMapRef": "NcjkP",
+        "changeHash": "0.5497256958843715",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Assistant Description",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "f7f64fbc-01d6-4f7b-a430-1a40c4419c5f",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "AssistantCreatedTime"
+      ],
+      "qFieldLabels": [
+        "Assistant Created Time"
+      ],
+      "qAlias": "Assistant Created Time",
+      "title": "Assistant Created Time",
+      "coloring": {
+        "colorMapRef": "NcjkP",
+        "changeHash": "0.027655637446330594",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Assistant Created Time",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "NcjkP",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "AssistantCreatedByUserName"
+      ],
+      "qFieldLabels": [
+        "Assistant Created By User Name"
+      ],
+      "qAlias": "Assistant Created By User Name",
+      "title": "Assistant Created By User Name",
+      "coloring": {
+        "changeHash": "0.6221690074431538",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Assistant Created By User Name",
+      "description": "",
+      "tags": []
+    }
+  }
+]

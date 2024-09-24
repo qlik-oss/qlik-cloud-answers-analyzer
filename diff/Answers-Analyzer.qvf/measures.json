@@ -1,0 +1,1680 @@
+[
+  {
+    "qInfo": {
+      "qId": "sJBLEUK",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Questions CM Remaining (Bar)",
+      "qDef": "RangeMax(\r\n\tSum($(vQuestionsQuota)) - [Questions CM] - $(vForecastQuestionCount),\n    0\n)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "coloring": {
+        "baseColor": {
+          "color": "#D9D9D9",
+          "index": -1
+        }
+      }
+    },
+    "qMetaDef": {
+      "title": "Questions CM Remaining (Bar)",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "8a32be8a-140e-420d-8b3f-2dd8cbd4f3c1",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Forecast (Bar)",
+      "qDef": "$(vForecastQuestionCount)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "U",
+        "qnDec": 10,
+        "qUseThou": 0
+      },
+      "numFormatFromTemplate": true,
+      "coloring": {
+        "baseColor": {
+          "color": "#10cfc9",
+          "index": 5
+        }
+      }
+    },
+    "qMetaDef": {
+      "title": "Forecast (Bar)",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "MkBgm",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Forecast",
+      "qDef": "If(\r\n    // If one month is not selected or possible and if it is the current month, show the forecast\n    MonthStart('$(vMaxThreadInteractionDate)')=MonthStart(ThreadInteractionMonthYear)\n    ,$(vForecastQuestionCount)\n)\n",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "U",
+        "qnDec": 10,
+        "qUseThou": 0
+      },
+      "numFormatFromTemplate": true,
+      "coloring": {
+        "baseColor": {
+          "color": "#10cfc9",
+          "index": 5
+        }
+      }
+    },
+    "qMetaDef": {
+      "title": "Forecast",
+      "description": "Only for use inside of \"Question by Month Drill\" chart for color.",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "b9fc5ffc-3c2e-4d6b-870f-3271e152415f",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "% Documents Referenced in Answers by Data Source",
+      "qDef": "[Distinct Documents Referenced in Answers] / [Data Source Documents]",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "0%",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "% Documents Referenced in Answers by Data Source",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "tcZatwg",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "% Downvotes",
+      "qDef": "[Downvotes] / Count(DISTINCT ThreadInteractionFeedbackID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "0%",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "% Downvotes",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "wLSDeG",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "% Upvotes",
+      "qDef": "[Upvotes] / Count(DISTINCT ThreadInteractionFeedbackID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "0%",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "% Upvotes",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "a12c2ae2-65ac-44e2-a542-26db9888c9e0",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Downvotes",
+      "qDef": "Count({\u003cThreadInteractionFeedbackVote={'Dislike'}\u003e}DISTINCT ThreadInteractionFeedbackID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Downvotes",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "jpaeYaH",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Upvotes",
+      "qDef": "Count({\u003cThreadInteractionFeedbackVote={'Like'}\u003e}DISTINCT ThreadInteractionFeedbackID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Upvotes",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "ckzpnKP",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Assistants",
+      "qDef": "Count({\u003cAssistantID-={'[Not Found]'}\u003e}DISTINCT AssistantID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Assistants",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "fbaa0286-eecf-4957-8718-ea9a96e3bad2",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Data Sources",
+      "qDef": "Count({\u003cKnowledgeBaseDataSourceID-={'[Not Found]'}\u003e}DISTINCT KnowledgeBaseDataSourceID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Data Sources",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "sDDfwx",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Knowledgebases",
+      "qDef": "Count({\u003cKnowledgeBaseID-={'[Not Found]'}\u003e}DISTINCT KnowledgeBaseID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Knowledgebases",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "eecd39d9-edee-497b-ba31-4ec359b34d77",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Negative Feedback",
+      "qDef": "Count({\u003cThreadInteractionFeedbackVote={'Dislike'}\u003e}DISTINCT ThreadInteractionID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Negative Feedback",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "YBnjs",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Positive Feedback",
+      "qDef": "Count({\u003cThreadInteractionFeedbackVote={'Like'}\u003e}DISTINCT ThreadInteractionID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Positive Feedback",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "NAAhUp",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Avg Daily Questions",
+      "qDef": "Avg(\r\n\tAggr(\n    \tCount(DISTINCT ThreadInteractionID),\n        ThreadInteractionDateWorkDaysOnly\n    )\n)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Avg Daily Questions",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "xNJEd",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Avg Daily Users",
+      "qDef": "Avg(\r\n\tAggr(\n\t\tCount(DISTINCT ThreadOwnerID),\n        ThreadInteractionDateWorkDaysOnly\n    )\n)\n    ",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Avg Daily Users",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "ad78088c-915f-42fb-9dc3-332ac30e205e",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "% Data Source Pages to Quota",
+      "qDef": "Alt((([Data Source Pages]/$(vPagesQuota))),0)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "0.0%",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "% Data Source Pages to Quota",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "gxXBp",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "% Knowledgebase Pages to Quota",
+      "qDef": "Alt((([Knowledgebase Pages]/$(vPagesQuota))),0)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "0.0%",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "% Knowledgebase Pages to Quota",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "1b42a78b-bb51-4602-aa10-81e7c063ce93",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Data Source Documents",
+      "qDef": "Sum(KnowledgeBaseDataSourceFileCount)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Data Source Documents",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "31b79555-8b23-45b0-97e2-6e92c65becd7",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Data Source Pages",
+      "qDef": "Sum(KnowledgeBaseDataSourcePages)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Data Source Pages",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "mmmXD",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Knowledgebase Days Since Last Index",
+      "qDef": "Interval(Avg([KnowledgeBaseLastIndexedStaleness]),'D hh:mm:ss')",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "U",
+        "qnDec": 10,
+        "qUseThou": 0
+      },
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Days Since Last Index",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "b1aca0bb-985e-4f69-81fb-acc7e86143ea",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Pages Remaining (Bar)",
+      "qDef": "Sum($(vPagesQuota)) - [Knowledgebase Pages]",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "coloring": {
+        "baseColor": {
+          "color": "#D9D9D9",
+          "index": -1
+        }
+      }
+    },
+    "qMetaDef": {
+      "title": "Pages Remaining (Bar)",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "db9a35ba-e0d9-42f8-84c2-0824488e90a3",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Pages (Bar)",
+      "qDef": " [Knowledgebase Pages]",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {
+        "baseColor": {
+          "color": "#006580",
+          "index": 6
+        }
+      }
+    },
+    "qMetaDef": {
+      "title": "Pages (Bar)",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "7eecbd23-930b-44f5-995b-85a7cb457106",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Questions CM (Bar)",
+      "qDef": "Count({\u003cThreadInteractionInCurrentMTD={1}\u003e}DISTINCT ThreadInteractionID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {
+        "baseColor": {
+          "color": "#006580",
+          "index": 6
+        }
+      }
+    },
+    "qMetaDef": {
+      "title": "Questions CM (Bar)",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "b5e0490a-f6c8-41a4-8f1e-40d451f54422",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Questions PMTD (Line)",
+      "qDef": "Count({\u003cThreadInteractionInPriorMTD={1}\u003e}DISTINCT ThreadInteractionID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {
+        "baseColor": {
+          "color": "#b1b1b1",
+          "index": -1
+        }
+      }
+    },
+    "qMetaDef": {
+      "title": "Questions PMTD (Line)",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "9db60372-1fa2-4831-bd5b-567e93f4f9e4",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Unanswered Questions",
+      "qDef": "Count({\u003cThreadInteractionHasSources={'False'}\u003e}DISTINCT ThreadInteractionID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Unanswered Questions",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "sLYScBb",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Avg Questions per Thread",
+      "qDef": "[Questions] / [Threads]",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0.0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Avg Questions per Thread",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "d1b90c45-da63-44e1-9351-39a80680b72e",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "% Questions to Quota PM",
+      "qDef": "If(\r\n\t[Questions PM] \u003e 0,\n\t[Questions PM] / $(vQuestionsQuota),\n    0\n)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "U",
+        "qnDec": 10,
+        "qUseThou": 0
+      },
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "% Questions to Quota PM",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "4bab2983-4c78-473a-80ee-818d897daed0",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Questions PMTD and CM",
+      "qDef": "Count({\u003cThreadInteractionInCurrentMTD={1}\u003e+\u003cThreadInteractionInPriorMTD={1}\u003e}DISTINCT ThreadInteractionID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "U",
+        "qnDec": 10,
+        "qUseThou": 0
+      },
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Questions PMTD and CM",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "QMyZDH",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Users Asking Questions CM vs PMTD (Indicator)",
+      "qDef": "If(\t\r\n\tLen([Users Asking Questions CM vs PMTD])\u003e=1,\n    Sign([Users Asking Questions CM vs PMTD]),\n0)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "U",
+        "qnDec": 10,
+        "qUseThou": 0
+      },
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Users Asking Questions CM vs PMTD (Indicator)",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "589ff69d-7092-4837-9e22-225352c33438",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Questions CM vs PMTD (Indicator)",
+      "qDef": "If(\t\r\n\tLen([Questions CM vs PMTD])\u003e=1,\n    Sign([Questions CM vs PMTD]),\n0)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "U",
+        "qnDec": 10,
+        "qUseThou": 0
+      },
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Questions CM vs PMTD (Indicator)",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "8ffedbe9-bfc0-495b-a765-35a9eb606c9b",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Questions CM vs PMTD",
+      "qDef": "[Questions CM] - [Questions PMTD]",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Questions CM vs PMTD",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "d21cb590-633e-4c40-9185-0da3e94bfea7",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Questions CM (Line)",
+      "qDef": "Count({\u003cThreadInteractionInCurrentMTD={1}\u003e}DISTINCT ThreadInteractionID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {
+        "baseColor": {
+          "color": "#006580",
+          "index": 6
+        }
+      }
+    },
+    "qMetaDef": {
+      "title": "Questions CM (Line)",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "5108b430-128e-41f7-827f-dd83e0c526ff",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Questions PM",
+      "qDef": "Count({\u003cThreadInteractionInPriorMonth={1}\u003e}DISTINCT ThreadInteractionID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Questions PM",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "5a65efc6-6459-4d50-87f8-c244da6da90a",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Questions PMTD",
+      "qDef": "Count({\u003cThreadInteractionInPriorMTD={1}\u003e}DISTINCT ThreadInteractionID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Questions PMTD",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "hVEnRat",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "% Questions to Quota CM",
+      "qDef": "If(\r\n\t[Questions CM] \u003e 0,\n\t[Questions CM] / $(vQuestionsQuota),\n    0\n)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "U",
+        "qnDec": 10,
+        "qUseThou": 0
+      },
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "% Questions to Quota CM",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "f8027789-bfa8-4555-a979-68c058051554",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Questions CM",
+      "qDef": "Count({\u003cThreadInteractionInCurrentMTD={1}\u003e}DISTINCT ThreadInteractionID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Questions CM",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "KKVPFmB",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Users Asking Questions",
+      "qDef": "Count(DISTINCT ThreadOwnerID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Users Asking Questions",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "shEn",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Users Asking Questions PMTD and CM",
+      "qDef": "Count({\u003cThreadInteractionInCurrentMTD={1}\u003e+\u003cThreadInteractionInPriorMTD={1}\u003e}DISTINCT ThreadOwnerID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "U",
+        "qnDec": 10,
+        "qUseThou": 0
+      },
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Users Asking Questions PMTD and CM",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "1932d676-2f9b-400e-9506-52d61d3a587b",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Users Asking Questions PMTD (Line)",
+      "qDef": "Count({\u003cThreadInteractionInPriorMTD={1}\u003e}DISTINCT ThreadOwnerID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {
+        "baseColor": {
+          "color": "#b1b1b1",
+          "index": -1
+        }
+      }
+    },
+    "qMetaDef": {
+      "title": "Users Asking Questions PMTD (Line)",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "f24b1c2e-c391-44a5-bf5b-ea2ce67a8dba",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Users Asking Questions CM (Line)",
+      "qDef": "Count({\u003cThreadInteractionInCurrentMTD={1}\u003e}DISTINCT ThreadOwnerID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {
+        "baseColor": {
+          "color": "#006580",
+          "index": 6
+        }
+      }
+    },
+    "qMetaDef": {
+      "title": "Users Asking Questions CM (Line)",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "BgDAk",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Threads",
+      "qDef": "Count(DISTINCT ThreadID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Threads",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "uqCmm",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "References",
+      "qDef": "Count(DISTINCT _KeyThreadInteractionSources)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "References",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "vWZuQ",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "% Documents Referenced in Answers",
+      "qDef": "[Distinct Documents Referenced in Answers] / [Knowledgebase Documents]",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "0%",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "% Documents Referenced in Answers",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "etJYqn",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Knowledgebase Documents",
+      "qDef": "Sum(KnowledgeBaseFileCount)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Documents",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "SPzCjNK",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Count of Document References in Answers",
+      "qDef": "Count(DISTINCT _KeyThreadInteractionSources)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Count of Document References in Answers",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "LuVnwM",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Distinct Documents Referenced in Answers",
+      "qDef": "Count(DISTINCT ThreadInteractionDocumentID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Distinct Documents Referenced in Answers",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "njGjXsU",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Users Asking Questions CM vs PMTD",
+      "qDef": "[Users Asking Questions CM] - [Users Asking Questions PMTD]",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Users Asking Questions CM vs PMTD",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "a55d5bea-2494-4310-ac50-4706cd3a4e2c",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Users Asking Questions PMTD",
+      "qDef": "Count({\u003cThreadInteractionInPriorMTD={1}\u003e}DISTINCT ThreadOwnerID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Users Asking Questions PMTD",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "eba4e43d-f32f-44b9-8f7a-4d9903b67413",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Users Asking Questions PM",
+      "qDef": "Count({\u003cThreadInteractionInPriorMonth={1}\u003e}DISTINCT ThreadOwnerID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Users Asking Questions PM",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "be1e2241-446f-47a7-83a3-cb9d52fc4863",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Users Asking Questions CM",
+      "qDef": "Count({\u003cThreadInteractionInCurrentMTD={1}\u003e}DISTINCT ThreadOwnerID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Users Asking Questions CM",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "vejBNnq",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Chunks in Documents",
+      "qDef": "Sum(DocumentChunkCount)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Chunks in Documents",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "dxnxjD",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Knowledgebase File Size (MB)",
+      "qDef": "Sum(KnowledgeBaseFileSize) / 1024 / 1024",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0.0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase File Size (MB)",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "Cvjtep",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Knowledgebase Text Size (MB)",
+      "qDef": "Sum(KnowledgeBaseTextSize) / 1024 / 1024",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0.0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Text Size (MB)",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "PDrPjBf",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Knowledgebase Pages",
+      "qDef": "Sum(KnowledgeBasePages)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Pages",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "TeQQSG",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Feedback",
+      "qDef": "Count(DISTINCT ThreadInteractionFeedbackID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Feedback",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "gFtRh",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Knowledgebase Syncs",
+      "qDef": "Count(DISTINCT KnowledgeBaseHistoryID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Syncs",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "PphXtjg",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Data Connections",
+      "qDef": "Count(DISTINCT KnowledgeBaseDataSourceConnectionID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Data Connections",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
+      "qId": "BgmVQvs",
+      "qType": "measure"
+    },
+    "qMeasure": {
+      "qLabel": "Questions",
+      "qDef": "Count(DISTINCT ThreadInteractionID)",
+      "qGrouping": "N",
+      "qExpressions": [],
+      "qActiveExpression": 0,
+      "qNumFormat": {
+        "qType": "F",
+        "qnDec": 2,
+        "qUseThou": 0,
+        "qFmt": "#,##0",
+        "qDec": ".",
+        "qThou": ","
+      },
+      "isCustomFormatted": false,
+      "numFormatFromTemplate": true,
+      "coloring": {}
+    },
+    "qMetaDef": {
+      "title": "Questions",
+      "description": "",
+      "tags": []
+    }
+  }
+]
