@@ -13,7 +13,7 @@ The Answers Analyzer provides a comprehensive dashboard to analyze Qlik Answers 
 
 ![Sheets in the Answers Analyzer](/images/Answers_Analyzer_Dashboard.png)
 
-It provides information such as:
+It provides the ability to:
 
 - Track user questions across knowledgebases, assistants, and source documents
 - Analyze user behavior to see what types of questions users are asking about what content
