@@ -1,6 +1,33 @@
 [
   {
     "qInfo": {
+      "qId": "48a1d6fc-30b9-4863-90ff-955cb3b02296",
+      "qType": "dimension"
+    },
+    "qDim": {
+      "qGrouping": "N",
+      "qFieldDefs": [
+        "=KnowledgeBaseDataSourceLastSyncCompletedTime"
+      ],
+      "qFieldLabels": [
+        "Knowledgebase Data Source Last Sync Time"
+      ],
+      "qAlias": "Knowledgebase Data Source Last Sync Time",
+      "title": "Knowledgebase Data Source Last Sync Time",
+      "coloring": {
+        "colorMapRef": "48a1d6fc-30b9-4863-90ff-955cb3b02296",
+        "changeHash": "0.8534750764707424",
+        "hasValueColors": false
+      }
+    },
+    "qMetaDef": {
+      "title": "Knowledgebase Data Source Last Sync Time",
+      "description": "",
+      "tags": []
+    }
+  },
+  {
+    "qInfo": {
       "qId": "TWFpXxv",
       "qType": "dimension"
     },
@@ -1448,33 +1475,6 @@
     },
     "qMetaDef": {
       "title": "Knowledgebase Data Source Last Sync Status",
-      "description": "",
-      "tags": []
-    }
-  },
-  {
-    "qInfo": {
-      "qId": "48a1d6fc-30b9-4863-90ff-955cb3b02296",
-      "qType": "dimension"
-    },
-    "qDim": {
-      "qGrouping": "N",
-      "qFieldDefs": [
-        "KnowledgeBaseDataSourceLastSyncCompletedAt"
-      ],
-      "qFieldLabels": [
-        "Knowledgebase Data Source Last Sync Time"
-      ],
-      "qAlias": "Knowledgebase Data Source Last Sync Time",
-      "title": "Knowledgebase Data Source Last Sync Time",
-      "coloring": {
-        "colorMapRef": "sRtQXE",
-        "changeHash": "0.1263803055744579",
-        "hasValueColors": false
-      }
-    },
-    "qMetaDef": {
-      "title": "Knowledgebase Data Source Last Sync Time",
       "description": "",
       "tags": []
     }
