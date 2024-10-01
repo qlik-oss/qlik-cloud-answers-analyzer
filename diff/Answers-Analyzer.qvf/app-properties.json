@@ -3,7 +3,7 @@
   "qThumbnail": {
     "qUrl": "/api/v1/apps/<appId>/media/files/Answers_Analyzer_Thumbnail.png"
   },
-  "description": "The Answers Analyzer provides a comprehensive dashboard to analyze Qlik Answers metadata across a Qlik Cloud tenant.\n\nCreated by Daniel Pilla, Master Principal Analytics Platform Architect, Qlik\n\n{v1.0.1}",
+  "description": "The Answers Analyzer provides a comprehensive dashboard to analyze Qlik Answers metadata across a Qlik Cloud tenant.\n\nCreated by Daniel Pilla, Master Principal Analytics Platform Architect, Qlik\n\n{v1.0.2}",
   "qUsage": "ANALYTICS",
   "published": false,
   "hassectionaccess": false
