@@ -2568,7 +2568,7 @@ SET comp			=;
 Let vTenants 		= 0;
 
 SET app_name		= 'Answers Analyzer';
-SET app_version		= '1.0.1';
+SET app_version		= '1.0.2';
 LET comp 			= ComputerName(); 
 LET engine_ver 		= PurgeChar(EngineVersion(),Chr(39)); 
 LET start_msg 		= 'Reloading $(app_name) $(app_version) from $(comp) running QIX Engine version $(engine_ver)';
@@ -2577,7 +2577,7 @@ Trace $(startMsg);
 
 SUB load_core_data
     Trace Loading data...;
-    For Each sub_routine in 'get_tenant_metadata','get_quota','get_users','get_spaces','get_data_connections','get_knowledgebases','get_knowledgebase_datasources','get_documents','get_assistants','get_threads','get_thread_interactions','get_audit_query_executed','incremental'
+    For Each sub_routine in 'check_version','get_tenant_metadata','get_quota','get_users','get_spaces','get_data_connections','get_knowledgebases','get_knowledgebase_datasources','get_documents','get_assistants','get_threads','get_thread_interactions','get_audit_query_executed','incremental'
         Call execute_sub(sub_routine)
     Next sub_routine
     
