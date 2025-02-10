@@ -1,169 +1,6 @@
 [
   {
     "qInfo": {
-      "qId": "fdbeb8e5-91b3-4e8f-a76d-a3a335d1dda3",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxUsersAskingQuestionsByAssistantCM",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "=Max(\r\n    Aggr(\n        [Users Asking Questions CM],\n        AssistantID\n    )\n)",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "59cb3183-3b65-4e57-a675-6f6766baaeae",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxUsersLine",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "=Max(Aggr([Users Asking Questions PMTD and CM],ThreadInteractionDay))",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "f3149fc7-58b2-4e83-9511-e3fc2db1fae6",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vTable",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "TenantMetadata"
-  },
-  {
-    "qInfo": {
-      "qId": "67bfbce5-697c-46de-9fb3-4bd30fb6d1d9",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vNumTables",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "15"
-  },
-  {
-    "qInfo": {
-      "qId": "6edc6ddc-f287-4db1-b43a-5da980741cfe",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxQuestionsByAssistant",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "=Max(\r\n\tAggr(\n    \t[Questions CM],\n        AssistantID\n    )\n)",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "1b1bb2f9-4471-4fc3-8733-462e29405021",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vQuestionAssistantSVGPadPx",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "=Len($(vMaxQuestionsByAssistant))*6",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "8b77d9c7-8846-4154-97a1-b20332772e58",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vQuestionAssistantPMSVGPadPx",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "=Len($(vMaxQuestionsByAssistantPM))*6",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "10a8336c-70b5-4067-a670-16d2af13f020",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxQuestionsByAssistantPM",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "=Alt(\r\n    Max(\n        Aggr(\n            [Questions PM],\n            AssistantID\n        )\n    )\n    ,0\n)",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "97d0a53c-769d-4f35-ac74-36f614d5aaac",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxQuestionsLine",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "=Max(Aggr([Questions PMTD and CM],ThreadInteractionDay))",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "7ac393e4-ea88-4249-8a27-f6ca04a5c9c0",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vDashboardContainer1",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "Questions by User",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "4a2eb04e-8cf4-4913-ab17-6f040c5891bb",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vDashboardContainer2",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "Questions Forecast",
-    "tags": []
-  },
-  {
-    "qInfo": {
       "qId": "850304e4-a33c-4c44-b4ef-f244fab5119a",
       "qType": "variable"
     },
@@ -175,126 +12,6 @@
       "qUseThou": 0
     },
     "qDefinition": "={1}Max$(vKnowledgebaseTableCalcEval)Aggr$(vKnowledgebaseTableCalcEval)[Users Asking Questions],KnowledgeBaseID))",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "b1a6fb70-e8e3-4f41-8c23-2b7e4181899e",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxQuestionsByKB",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "={1}Max$(vKnowledgebaseTableCalcEval)Aggr$(vKnowledgebaseTableCalcEval)[Questions],KnowledgeBaseID))",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "ea6248a1-8e4b-41c2-8138-a78d937862d4",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxKnowledgebaseDocumentsByKB",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "={1}Max$(vKnowledgebaseTableCalcEval)Aggr$(vKnowledgebaseTableCalcEval)[Knowledgebase Documents],KnowledgeBaseID))",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "7bf519ef-9f18-4b56-9ff9-41e70e714d40",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxDistinctDocumentsReferencedInAnswersByKB",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "={1}Max$(vKnowledgebaseTableCalcEval)Aggr$(vKnowledgebaseTableCalcEval)[Distinct Documents Referenced in Answers],KnowledgeBaseID))",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "fc4ba7a3-e482-4954-ad40-87f14d5de792",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxThreadsByKB",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "={1}Max$(vKnowledgebaseTableCalcEval)Aggr$(vKnowledgebaseTableCalcEval)[Threads],KnowledgeBaseID))",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "2644206a-6c36-4d96-bbdf-c4bca4670c37",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxPagesByKB",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "={1}Max$(vKnowledgebaseTableCalcEval)Aggr$(vKnowledgebaseTableCalcEval)[Knowledgebase Pages],KnowledgeBaseID))",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "fd35a336-7e2b-44c4-ac63-471eb344f973",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxChunksInDocumentsByKB",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "={1}Max$(vKnowledgebaseTableCalcEval)Aggr$(vKnowledgebaseTableCalcEval)[Chunks in Documents],KnowledgeBaseID))",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "b4225016-7178-468d-b5b8-4232dc6b8bd2",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxKnowledgebaseFileSizeByKB",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "={1}Max$(vKnowledgebaseTableCalcEval)Aggr$(vKnowledgebaseTableCalcEval)[Knowledgebase File Size (MB)],KnowledgeBaseID))",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "5cbb74ea-067f-43a2-a1e3-307637541a9c",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vKnowledgebaseTableCalcEval",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "=If('$(vDashboardContainer3)'='Knowledgebases','(')",
     "tags": []
   },
   {
@@ -314,122 +31,46 @@
   },
   {
     "qInfo": {
-      "qId": "d20e1a4e-e826-402f-98a9-b09144fdb1a6",
+      "qId": "67bfbce5-697c-46de-9fb3-4bd30fb6d1d9",
       "qType": "variable"
     },
     "qMetaDef": {},
-    "qName": "vMaxDistinctDocumentsReferencedInAnswersByKBDataSource",
+    "qName": "vNumTables",
     "qNumberPresentation": {
       "qType": "U",
       "qnDec": 10,
       "qUseThou": 0
     },
-    "qDefinition": "={1}Max$(vKnowledgebaseDataSourcesTableCalcEval)Aggr$(vKnowledgebaseDataSourcesTableCalcEval)[Distinct Documents Referenced in Answers],KnowledgeBaseDataSourceID))",
+    "qDefinition": "15"
+  },
+  {
+    "qInfo": {
+      "qId": "4a2eb04e-8cf4-4913-ab17-6f040c5891bb",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vDashboardContainer2",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "Questions Forecast",
     "tags": []
   },
   {
     "qInfo": {
-      "qId": "6755b8ba-07a2-46aa-9ed3-dc57e0b4230a",
+      "qId": "8b77d9c7-8846-4154-97a1-b20332772e58",
       "qType": "variable"
     },
     "qMetaDef": {},
-    "qName": "vMaxUsersAskingQuestionsByKBDataSource",
+    "qName": "vQuestionAssistantPMSVGPadPx",
     "qNumberPresentation": {
       "qType": "U",
       "qnDec": 10,
       "qUseThou": 0
     },
-    "qDefinition": "={1}Max$(vKnowledgebaseDataSourcesTableCalcEval)Aggr$(vKnowledgebaseDataSourcesTableCalcEval)[Users Asking Questions],KnowledgeBaseDataSourceID))",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "802504ea-befc-4a4a-8f40-fc2815e79d73",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMax%DocumentsReferencedInAnswersKBDataSource",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "={1}Max$(vKnowledgebaseDataSourcesTableCalcEval)Aggr$(vKnowledgebaseDataSourcesTableCalcEval)[% Documents Referenced in Answers],KnowledgeBaseDataSourceID))",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "f8af32ca-c06e-4026-baf6-569047dbed86",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxDataSourcePagesByKBDataSource",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "={1}Max$(vKnowledgebaseDataSourcesTableCalcEval)Aggr$(vKnowledgebaseDataSourcesTableCalcEval)[Data Source Pages],KnowledgeBaseDataSourceID))",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "01cf3748-cfdd-4ae1-8436-c9d91e7aaa80",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxDataSourceDocumentsByKBDataSource",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "={1}Max$(vKnowledgebaseDataSourcesTableCalcEval)Aggr$(vKnowledgebaseDataSourcesTableCalcEval)[Data Source Documents],KnowledgeBaseDataSourceID))",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "ff0e38e2-a217-4596-b503-9ce30c3bd8a4",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vAssistantTableCalcEval",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "=If('$(vDashboardContainer3)'='Assistants','(')",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "dd954641-9226-4972-8082-cb52ed9fdaff",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxUsersAskingQuestionsByAssistant",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "={1}Max$(vAssistantTableCalcEval)Aggr$(vAssistantTableCalcEval)[Users Asking Questions],AssistantID))",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "be33204e-13cf-4d86-8922-78a4af88e005",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxKnowledgebaseDocumentsByAssistant",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "={1}Max$(vAssistantTableCalcEval)Aggr$(vAssistantTableCalcEval)[Knowledgebase Documents],AssistantID))",
+    "qDefinition": "=Len($(vMaxQuestionsByAssistantPM))*6",
     "tags": []
   },
   {
@@ -464,227 +105,121 @@
   },
   {
     "qInfo": {
-      "qId": "a6d710c0-b681-4f78-9714-9d9c0acd9803",
+      "qId": "1b1bb2f9-4471-4fc3-8733-462e29405021",
       "qType": "variable"
     },
     "qMetaDef": {},
-    "qName": "vMaxAvgQuestionsPerThreadByAssistant",
+    "qName": "vQuestionAssistantSVGPadPx",
     "qNumberPresentation": {
       "qType": "U",
       "qnDec": 10,
       "qUseThou": 0
     },
-    "qDefinition": "={1}Max$(vAssistantTableCalcEval)Aggr$(vAssistantTableCalcEval)[Avg Questions per Thread],AssistantID))",
+    "qDefinition": "=Len($(vMaxQuestionsByAssistant))*6",
     "tags": []
   },
   {
     "qInfo": {
-      "qId": "76868adf-23c1-446f-b88e-7afcc3f660d6",
+      "qId": "f3149fc7-58b2-4e83-9511-e3fc2db1fae6",
       "qType": "variable"
     },
     "qMetaDef": {},
-    "qName": "vMaxPagesByKnowledgebase",
+    "qName": "vTable",
     "qNumberPresentation": {
       "qType": "U",
       "qnDec": 10,
       "qUseThou": 0
     },
-    "qDefinition": "=Max(\r\n    Aggr(\n        [Knowledgebase Pages],\n        KnowledgeBaseID\n    )\n)",
+    "qDefinition": "TenantMetadata"
+  },
+  {
+    "qInfo": {
+      "qId": "fdbeb8e5-91b3-4e8f-a76d-a3a335d1dda3",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxUsersAskingQuestionsByAssistantCM",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "=Max(\r\n    Aggr(\n        [Users Asking Questions CM],\n        AssistantID\n    )\n)",
     "tags": []
   },
   {
     "qInfo": {
-      "qId": "20db7804-46e2-4a97-a00e-b186b186ecf0",
+      "qId": "b1a6fb70-e8e3-4f41-8c23-2b7e4181899e",
       "qType": "variable"
     },
     "qMetaDef": {},
-    "qName": "vPageKnowledgebaseSVGPadPx",
+    "qName": "vMaxQuestionsByKB",
     "qNumberPresentation": {
       "qType": "U",
       "qnDec": 10,
       "qUseThou": 0
     },
-    "qDefinition": "=Len($(vMaxPagesByKnowledgebase))*6",
+    "qDefinition": "={1}Max$(vKnowledgebaseTableCalcEval)Aggr$(vKnowledgebaseTableCalcEval)[Questions],KnowledgeBaseID))",
     "tags": []
   },
   {
     "qInfo": {
-      "qId": "6223b3c4-52a6-4ceb-9db6-cf28afa9569c",
+      "qId": "97d0a53c-769d-4f35-ac74-36f614d5aaac",
       "qType": "variable"
     },
     "qMetaDef": {},
-    "qName": "vPageDataSourceSVGPadPx",
+    "qName": "vMaxQuestionsLine",
     "qNumberPresentation": {
       "qType": "U",
       "qnDec": 10,
       "qUseThou": 0
     },
-    "qDefinition": "=Len($(vMaxPagesByDataSource))*6",
+    "qDefinition": "=Max(Aggr([Questions PMTD and CM],ThreadInteractionDay))",
     "tags": []
   },
   {
     "qInfo": {
-      "qId": "819b3f41-7c93-4256-9e3e-21e23f178ae5",
+      "qId": "ea6248a1-8e4b-41c2-8138-a78d937862d4",
       "qType": "variable"
     },
     "qMetaDef": {},
-    "qName": "vMaxPagesByDataSource",
+    "qName": "vMaxKnowledgebaseDocumentsByKB",
     "qNumberPresentation": {
       "qType": "U",
       "qnDec": 10,
       "qUseThou": 0
     },
-    "qDefinition": "=Max(\r\n    Aggr(\n        [Data Source Pages],\n        KnowledgeBaseDataSourceID\n    )\n)",
+    "qDefinition": "={1}Max$(vKnowledgebaseTableCalcEval)Aggr$(vKnowledgebaseTableCalcEval)[Knowledgebase Documents],KnowledgeBaseID))",
     "tags": []
   },
   {
     "qInfo": {
-      "qId": "b021f0bd-19f9-4cb7-be40-3c9511ae6181",
+      "qId": "59cb3183-3b65-4e57-a675-6f6766baaeae",
       "qType": "variable"
     },
     "qMetaDef": {},
-    "qName": "vPivotColorBy",
+    "qName": "vMaxUsersLine",
     "qNumberPresentation": {
       "qType": "U",
       "qnDec": 10,
       "qUseThou": 0
     },
-    "qDefinition": "=Max(Aggr([$(vPivotMeasureModifier)],$(vPivotDimModifier),$(vPivotColumnModifier)))",
+    "qDefinition": "=Max(Aggr([Users Asking Questions PMTD and CM],ThreadInteractionDay))",
     "tags": []
   },
   {
     "qInfo": {
-      "qId": "b7177831-ea71-48d3-80cc-bb79564e5ae1",
+      "qId": "6edc6ddc-f287-4db1-b43a-5da980741cfe",
       "qType": "variable"
     },
     "qMetaDef": {},
-    "qName": "vMax%UpvotesByKB",
+    "qName": "vMaxQuestionsByAssistant",
     "qNumberPresentation": {
       "qType": "U",
       "qnDec": 10,
       "qUseThou": 0
     },
-    "qDefinition": "={1}Max$(vKnowledgebaseTableCalcEval)Aggr$(vKnowledgebaseTableCalcEval)[% Upvotes],KnowledgeBaseID))",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "a27e15b0-887f-4948-b688-a626964d30b3",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxUpvotesByKB",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "={1}Max$(vKnowledgebaseTableCalcEval)Aggr$(vKnowledgebaseTableCalcEval)[Upvotes],KnowledgeBaseID))",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "e57b35bf-0ef5-4b9b-b286-00ff5c0062d9",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxDownvotesByKB",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "={1}Max$(vKnowledgebaseTableCalcEval)Aggr$(vKnowledgebaseTableCalcEval)[Downvotes],KnowledgeBaseID))",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "603d90ec-b16c-49a5-9918-285a60568ec2",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxUpvotesByKBDataSource",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "={1}Max$(vKnowledgebaseDataSourcesTableCalcEval)Aggr$(vKnowledgebaseDataSourcesTableCalcEval)[Upvotes],KnowledgeBaseDataSourceID))",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "bce64663-162a-4768-ac09-f6f7a3ac6d05",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxDownvotesByKBDataSource",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "={1}Max$(vKnowledgebaseDataSourcesTableCalcEval)Aggr$(vKnowledgebaseDataSourcesTableCalcEval)[Downvotes],KnowledgeBaseDataSourceID))",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "73691d56-3c0b-4338-882c-9f620b07b705",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxUpvotesByAssistant",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "={1}Max$(vAssistantTableCalcEval)Aggr$(vAssistantTableCalcEval)[Upvotes],AssistantID))",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "f96d1729-054e-4be3-9d3f-55d7111e7cbb",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxDownvotesByAssistant",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "={1}Max$(vAssistantTableCalcEval)Aggr$(vAssistantTableCalcEval)[Downvotes],AssistantID))",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "11969068-b376-4bec-a144-396e586b9607",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vDocumentTableCalcEval",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "=If('$(vDashboardContainer3)'='Document Detail','(')",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "3e2aa244-b054-4813-a5b6-98443e5ddfed",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxQuestionsByDocument",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "={1 \u003cDocumentPages={\"*\"}\u003e}Max$(vDocumentTableCalcEval)Aggr$(vDocumentTableCalcEval)[Questions],_DocKey))",
+    "qDefinition": "=Max(\r\n\tAggr(\n    \t[Questions CM],\n        AssistantID\n    )\n)",
     "tags": []
   },
   {
@@ -699,191 +234,6 @@
       "qnDec": 10,
       "qUseThou": 0
     }
-  },
-  {
-    "qInfo": {
-      "qId": "f0d225de-fc43-4525-8bb6-792d1480945c",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vKnowledgeBaseDataSourceHasBeenSynced",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "-1"
-  },
-  {
-    "qInfo": {
-      "qId": "1605bacf-cbfd-4d95-bfdd-0a91dc751791",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vKnowledgeBaseHistoryID",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "e0832283-851d-4dc9-b315-ccae1daa8483"
-  },
-  {
-    "qInfo": {
-      "qId": "914e1710-58fb-4b2d-9c2c-8add8c8a4f3f",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxPercentUpvotesByAssistant",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "={1}Max$(vAssistantTableCalcEval)Aggr$(vAssistantTableCalcEval)[Upvotes] / [Questions],AssistantID))",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "415048a1-f543-47f5-bf54-cb6018c50709",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxPercentDownvotesByAssistant",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "={1}Max$(vAssistantTableCalcEval)Aggr$(vAssistantTableCalcEval)[Downvotes] / [Questions],AssistantID))",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "ebe45d64-c6b2-4b33-81d5-17e75d8ed9a7",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxPercentFeedbackByAssistant",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "={1}Max$(vAssistantTableCalcEval)Aggr$(vAssistantTableCalcEval)[Feedback] / [Questions],AssistantID))",
-    "tags": []
-  },
-  {
-    "qInfo": {
-      "qId": "8d9dfa1e-07f0-42a2-8967-76fc60b413ad",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vu_reload_rolling_range",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "365"
-  },
-  {
-    "qInfo": {
-      "qId": "8f976d0b-ba83-431c-b411-db396df12b8c",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vTableName",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "Last_UsageTime"
-  },
-  {
-    "qInfo": {
-      "qId": "20cca584-b9f9-4600-8c7c-04c7e87131e9",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "0",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "0"
-  },
-  {
-    "qInfo": {
-      "qId": "5d9a6ea1-ec13-4e58-9db3-2eab265fb5d1",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vTenantFileFound",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "1"
-  },
-  {
-    "qInfo": {
-      "qId": "4c734709-3fae-4eae-b675-556512936a44",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vAnyFileFound",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "1"
-  },
-  {
-    "qInfo": {
-      "qId": "518b4467-a3f2-44c5-b867-69ba57fbefe9",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "1",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "1"
-  },
-  {
-    "qInfo": {
-      "qId": "d6e42b36-6c39-415e-be70-cff9691d7070",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vMaxDate",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "9/18/2024"
-  },
-  {
-    "qInfo": {
-      "qId": "7b5ddbf1-b558-4c68-a671-ed1c2e31c3f5",
-      "qType": "variable"
-    },
-    "qMetaDef": {},
-    "qName": "vDatesToGen",
-    "qNumberPresentation": {
-      "qType": "U",
-      "qnDec": 10,
-      "qUseThou": 0
-    },
-    "qDefinition": "30"
   },
   {
     "qInfo": {
@@ -931,6 +281,684 @@
   },
   {
     "qInfo": {
+      "qId": "6881799c-ccfd-423d-8222-c082e72a3b9e",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "file",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "LinkDataSourceKB"
+  },
+  {
+    "qInfo": {
+      "qId": "fc4ba7a3-e482-4954-ad40-87f14d5de792",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxThreadsByKB",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "={1}Max$(vKnowledgebaseTableCalcEval)Aggr$(vKnowledgebaseTableCalcEval)[Threads],KnowledgeBaseID))",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "8f976d0b-ba83-431c-b411-db396df12b8c",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vTableName",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "Last_UsageTime"
+  },
+  {
+    "qInfo": {
+      "qId": "7bf519ef-9f18-4b56-9ff9-41e70e714d40",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxDistinctDocumentsReferencedInAnswersByKB",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "={1}Max$(vKnowledgebaseTableCalcEval)Aggr$(vKnowledgebaseTableCalcEval)[Distinct Documents Referenced in Answers],KnowledgeBaseID))",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "d20e1a4e-e826-402f-98a9-b09144fdb1a6",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxDistinctDocumentsReferencedInAnswersByKBDataSource",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "={1}Max$(vKnowledgebaseDataSourcesTableCalcEval)Aggr$(vKnowledgebaseDataSourcesTableCalcEval)[Distinct Documents Referenced in Answers],KnowledgeBaseDataSourceID))",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "01cf3748-cfdd-4ae1-8436-c9d91e7aaa80",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxDataSourceDocumentsByKBDataSource",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "={1}Max$(vKnowledgebaseDataSourcesTableCalcEval)Aggr$(vKnowledgebaseDataSourcesTableCalcEval)[Data Source Documents],KnowledgeBaseDataSourceID))",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "b021f0bd-19f9-4cb7-be40-3c9511ae6181",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vPivotColorBy",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "=Max(Aggr([$(vPivotMeasureModifier)],$(vPivotDimModifier),$(vPivotColumnModifier)))",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "e57b35bf-0ef5-4b9b-b286-00ff5c0062d9",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxDownvotesByKB",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "={1}Max$(vKnowledgebaseTableCalcEval)Aggr$(vKnowledgebaseTableCalcEval)[Downvotes],KnowledgeBaseID))",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "76868adf-23c1-446f-b88e-7afcc3f660d6",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxPagesByKnowledgebase",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "=Max(\r\n    Aggr(\n        [Knowledgebase Pages],\n        KnowledgeBaseID\n    )\n)",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "819b3f41-7c93-4256-9e3e-21e23f178ae5",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxPagesByDataSource",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "=Max(\r\n    Aggr(\n        [Data Source Pages],\n        KnowledgeBaseDataSourceID\n    )\n)",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "73691d56-3c0b-4338-882c-9f620b07b705",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxUpvotesByAssistant",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "={1}Max$(vAssistantTableCalcEval)Aggr$(vAssistantTableCalcEval)[Upvotes],AssistantID))",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "1605bacf-cbfd-4d95-bfdd-0a91dc751791",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vKnowledgeBaseHistoryID",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "e0832283-851d-4dc9-b315-ccae1daa8483"
+  },
+  {
+    "qInfo": {
+      "qId": "518b4467-a3f2-44c5-b867-69ba57fbefe9",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "1",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "1"
+  },
+  {
+    "qInfo": {
+      "qId": "ebe45d64-c6b2-4b33-81d5-17e75d8ed9a7",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxPercentFeedbackByAssistant",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "={1}Max$(vAssistantTableCalcEval)Aggr$(vAssistantTableCalcEval)[Feedback] / [Questions],AssistantID))",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "5cbb74ea-067f-43a2-a1e3-307637541a9c",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vKnowledgebaseTableCalcEval",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "=If('$(vDashboardContainer3)'='Knowledgebases','(')",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "20db7804-46e2-4a97-a00e-b186b186ecf0",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vPageKnowledgebaseSVGPadPx",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "=Len($(vMaxPagesByKnowledgebase))*6",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "8d9dfa1e-07f0-42a2-8967-76fc60b413ad",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vu_reload_rolling_range",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "365"
+  },
+  {
+    "qInfo": {
+      "qId": "53867c90-fcbf-416f-881c-87f78eb05b72",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vThreadID",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "d1d96d43-988e-4817-85d6-cf82fb4e3548"
+  },
+  {
+    "qInfo": {
+      "qId": "6223b3c4-52a6-4ceb-9db6-cf28afa9569c",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vPageDataSourceSVGPadPx",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "=Len($(vMaxPagesByDataSource))*6",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "b7177831-ea71-48d3-80cc-bb79564e5ae1",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMax%UpvotesByKB",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "={1}Max$(vKnowledgebaseTableCalcEval)Aggr$(vKnowledgebaseTableCalcEval)[% Upvotes],KnowledgeBaseID))",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "914e1710-58fb-4b2d-9c2c-8add8c8a4f3f",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxPercentUpvotesByAssistant",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "={1}Max$(vAssistantTableCalcEval)Aggr$(vAssistantTableCalcEval)[Upvotes] / [Questions],AssistantID))",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "603d90ec-b16c-49a5-9918-285a60568ec2",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxUpvotesByKBDataSource",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "={1}Max$(vKnowledgebaseDataSourcesTableCalcEval)Aggr$(vKnowledgebaseDataSourcesTableCalcEval)[Upvotes],KnowledgeBaseDataSourceID))",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "3e2aa244-b054-4813-a5b6-98443e5ddfed",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxQuestionsByDocument",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "={1 \u003cDocumentPages={\"*\"}\u003e}Max$(vDocumentTableCalcEval)Aggr$(vDocumentTableCalcEval)[Questions],_DocKey))",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "5d9a6ea1-ec13-4e58-9db3-2eab265fb5d1",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vTenantFileFound",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "1"
+  },
+  {
+    "qInfo": {
+      "qId": "fd35a336-7e2b-44c4-ac63-471eb344f973",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxChunksInDocumentsByKB",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "={1}Max$(vKnowledgebaseTableCalcEval)Aggr$(vKnowledgebaseTableCalcEval)[Chunks in Documents],KnowledgeBaseID))",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "f8af32ca-c06e-4026-baf6-569047dbed86",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxDataSourcePagesByKBDataSource",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "={1}Max$(vKnowledgebaseDataSourcesTableCalcEval)Aggr$(vKnowledgebaseDataSourcesTableCalcEval)[Data Source Pages],KnowledgeBaseDataSourceID))",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "a6d710c0-b681-4f78-9714-9d9c0acd9803",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxAvgQuestionsPerThreadByAssistant",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "={1}Max$(vAssistantTableCalcEval)Aggr$(vAssistantTableCalcEval)[Avg Questions per Thread],AssistantID))",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "bce64663-162a-4768-ac09-f6f7a3ac6d05",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxDownvotesByKBDataSource",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "={1}Max$(vKnowledgebaseDataSourcesTableCalcEval)Aggr$(vKnowledgebaseDataSourcesTableCalcEval)[Downvotes],KnowledgeBaseDataSourceID))",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "7b5ddbf1-b558-4c68-a671-ed1c2e31c3f5",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vDatesToGen",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "30"
+  },
+  {
+    "qInfo": {
+      "qId": "7ac393e4-ea88-4249-8a27-f6ca04a5c9c0",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vDashboardContainer1",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "Questions by User",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "dd954641-9226-4972-8082-cb52ed9fdaff",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxUsersAskingQuestionsByAssistant",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "={1}Max$(vAssistantTableCalcEval)Aggr$(vAssistantTableCalcEval)[Users Asking Questions],AssistantID))",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "f96d1729-054e-4be3-9d3f-55d7111e7cbb",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxDownvotesByAssistant",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "={1}Max$(vAssistantTableCalcEval)Aggr$(vAssistantTableCalcEval)[Downvotes],AssistantID))",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "11969068-b376-4bec-a144-396e586b9607",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vDocumentTableCalcEval",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "=If('$(vDashboardContainer3)'='Document Detail','(')",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "415048a1-f543-47f5-bf54-cb6018c50709",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxPercentDownvotesByAssistant",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "={1}Max$(vAssistantTableCalcEval)Aggr$(vAssistantTableCalcEval)[Downvotes] / [Questions],AssistantID))",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "2644206a-6c36-4d96-bbdf-c4bca4670c37",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxPagesByKB",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "={1}Max$(vKnowledgebaseTableCalcEval)Aggr$(vKnowledgebaseTableCalcEval)[Knowledgebase Pages],KnowledgeBaseID))",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "b4225016-7178-468d-b5b8-4232dc6b8bd2",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxKnowledgebaseFileSizeByKB",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "={1}Max$(vKnowledgebaseTableCalcEval)Aggr$(vKnowledgebaseTableCalcEval)[Knowledgebase File Size (MB)],KnowledgeBaseID))",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "802504ea-befc-4a4a-8f40-fc2815e79d73",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMax%DocumentsReferencedInAnswersKBDataSource",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "={1}Max$(vKnowledgebaseDataSourcesTableCalcEval)Aggr$(vKnowledgebaseDataSourcesTableCalcEval)[% Documents Referenced in Answers],KnowledgeBaseDataSourceID))",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "4c734709-3fae-4eae-b675-556512936a44",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vAnyFileFound",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "1"
+  },
+  {
+    "qInfo": {
+      "qId": "10a8336c-70b5-4067-a670-16d2af13f020",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxQuestionsByAssistantPM",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "=Alt(\r\n    Max(\n        Aggr(\n            [Questions PM],\n            AssistantID\n        )\n    )\n    ,0\n)",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "be33204e-13cf-4d86-8922-78a4af88e005",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxKnowledgebaseDocumentsByAssistant",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "={1}Max$(vAssistantTableCalcEval)Aggr$(vAssistantTableCalcEval)[Knowledgebase Documents],AssistantID))",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "a27e15b0-887f-4948-b688-a626964d30b3",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxUpvotesByKB",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "={1}Max$(vKnowledgebaseTableCalcEval)Aggr$(vKnowledgebaseTableCalcEval)[Upvotes],KnowledgeBaseID))",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "f0d225de-fc43-4525-8bb6-792d1480945c",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vKnowledgeBaseDataSourceHasBeenSynced",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "-1"
+  },
+  {
+    "qInfo": {
+      "qId": "20cca584-b9f9-4600-8c7c-04c7e87131e9",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "0",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "0"
+  },
+  {
+    "qInfo": {
+      "qId": "6755b8ba-07a2-46aa-9ed3-dc57e0b4230a",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxUsersAskingQuestionsByKBDataSource",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "={1}Max$(vKnowledgebaseDataSourcesTableCalcEval)Aggr$(vKnowledgebaseDataSourcesTableCalcEval)[Users Asking Questions],KnowledgeBaseDataSourceID))",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "ff0e38e2-a217-4596-b503-9ce30c3bd8a4",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vAssistantTableCalcEval",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "=If('$(vDashboardContainer3)'='Assistants','(')",
+    "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "d6e42b36-6c39-415e-be70-cff9691d7070",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "vMaxDate",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "9/18/2024"
+  },
+  {
+    "qInfo": {
       "qId": "dae98cb3-d827-4753-8278-5af3e4930076",
       "qType": "variable"
     },
@@ -943,5 +971,19 @@
     },
     "qDefinition": "=$(vForecastQuestionMax) - [Questions CM]",
     "tags": []
+  },
+  {
+    "qInfo": {
+      "qId": "8b2b40a3-8936-4230-b074-31e1f7dfde83",
+      "qType": "variable"
+    },
+    "qMetaDef": {},
+    "qName": "file_size_LinkDataSourceKB",
+    "qNumberPresentation": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "qDefinition": "6356"
   }
 ]

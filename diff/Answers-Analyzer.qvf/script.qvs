@@ -46,7 +46,8 @@ SET vu_GMT_offset = 0;
 
 
 /*
-2. The number of days back to fetch data initially, before incrementally building
+2. The number of days back to fetch data initially, before incrementally building. Max of 90 due
+   to the Audits API limit.
 */
 SET vu_initial_days_back = 90; // The number of days back to fetch data initially, before incrementally building
 
@@ -116,7 +117,7 @@ SET vu_qlik_meta_collection_parent_dir = 'lib://:';			// Parent directory of the
                                                                                      /____/                     
 
 
-    Copyright 2024 QlikTech International
+    Copyright 2025 QlikTech International
     Created by Daniel Pilla, Principal Analytics Platform Architect, Qlik
 
 	About the "Answers Analyzer" app:
@@ -165,7 +166,8 @@ SUB variables
     SET vIncremental 				= 1;  // Incremental load flag -- default = 1 (active). This can be disabled by setting to 0 (why do that?)
     LET vAppQVDName					= Lower(Replace('$(app_name)',' ','_'));
     SET vOutputQVDName				= '$(vu_qvd_storage_connection)/$(vAppQVDName)_$1_$2.qvd';
-    LET vAuditQueryEventsQVD 		= '$(vOutputQVDName(AuditQueryEvents,$(app_version)))';
+    LET vAuditQueryEventsQVD 		= '$(vOutputQVDName(AuditQueryEvents,$(app_schema_version)))';
+    LET vThreadInteractionsQVD 		= '$(vOutputQVDName(ThreadInteractions,$(app_schema_version)))';
     LET vIncrementalQVDsAvailable	= If(Len(FileTime('$(vAuditQueryEventsQVD)'))>0,1,0);  // Check to see that incremental QVDs are available
     LET vIncrementalMessage 		= If($(vIncrementalQVDsAvailable)=1,'Incremental QVDs found','No Incremental QVDs found. Do not panic. I can fix that.');
     LET vLastReloadTime 			= TimeStamp(ReloadTime());
@@ -207,20 +209,34 @@ SUB variables
 
             LET vIncrementalStartTimeDisplay = TimeStamp('$(vIncrementalStartTime)','MM/DD/YYYY hh:mm:ss.fff');
 
-            TRACE Incremental will resume from: $(vIncrementalStartTimeDisplay);
+            TRACE Incremental for Audits API will resume from: $(vIncrementalStartTimeDisplay);
+            
+            ThreadInteractionUpdateMaxTime:
+            LOAD
+                Max(ThreadInteractionUpdatedTime) AS ThreadInteractionUpdateTimeMax
+            FROM '$(vThreadInteractionsQVD)'(qvd);
+
+            LET vIncrementalStartTimeThreadInteractions = Peek('ThreadInteractionUpdateTimeMax',0,'ThreadInteractionUpdateMaxTime') - (1 / 24 / 60); // subtract a minute so that at least 1 event is always returned
+
+            DROP TABLE ThreadInteractionUpdateMaxTime;
+
+            LET vIncrementalStartTimeDisplay = TimeStamp('$(vIncrementalStartTimeThreadInteractions)','MM/DD/YYYY hh:mm:ss.fff');
+
+            TRACE Incremental for Thread Interactions will resume from: $(vIncrementalStartTimeDisplay);
 
             SET vIncrementalStartTimeDisplay =;
-
+            
         ELSE
 
             TRACE $(vIncrementalMessage);
 
             LET vIncrementalStartTime = '$(vInitialDaysBack)';
+            LET vIncrementalStartTimeThreadInteractions = '$(vInitialDaysBack)';
 
         END IF
     
     END IF
-                    
+                        
 END SUB
 ///$tab Check Version
 SUB check_version
@@ -556,6 +572,13 @@ SUB get_users
 
     Map_UserID_UserEmail:
     MAPPING LOAD DISTINCT
+        UserID,
+        UserEmail
+    RESIDENT Users;
+    
+    // Required for multi-tenant support, will turn into map later
+    UserID_UserEmail:
+    LOAD DISTINCT
         UserID,
         UserEmail
     RESIDENT Users;
@@ -965,6 +988,13 @@ SUB get_knowledgebases
     	KnowledgeBaseID,
         KnowledgeBaseName
     RESIDENT KnowledgeBases;
+    
+    // Required for multi-tenant support, will be turned into a map later
+	KnowledgeBaseID_KnowledgeBaseName:
+    LOAD DISTINCT
+    	KnowledgeBaseID,
+        KnowledgeBaseName
+    RESIDENT KnowledgeBases;
 
     DROP TABLE KnowledgeBaseMeta;
     DROP FIELD [_KeyKnowledgeBaseTemp];
@@ -1137,6 +1167,8 @@ SUB get_knowledgebase_datasources
         LOAD	
             [lastSyncId] AS KnowledgeBaseDataSourceLastSyncID,
             TimeStamp(createdAt + $(vTimeDiffFromGMT)) AS KnowledgeBaseDataSourceLastSyncStartedTime,
+            TimeStamp(lastIndexedAt + $(vTimeDiffFromGMT)) AS ThreadInteractionSourceLastIndexedTime, // Preserving front-end as field became unavailable in /interactions
+            TimeStamp(lastIndexedAt + $(vTimeDiffFromGMT)) AS KnowledgeBaseDataSourceLastIndexedTime,
             TimeStamp(completedAt + $(vTimeDiffFromGMT)) AS KnowledgeBaseDataSourceLastSyncCompletedTime,
             [status] AS KnowledgeBaseDataSourceLastSyncStatus,
             [__FK_syncInfo] & '|' & $(vCounter) AS [_KeyKnowledgeBaseDataSourceScopeDataSources]
@@ -1676,160 +1708,192 @@ END SUB
 SUB get_thread_interactions
 
 	LET vThreadInteractionCutoffTime = Now();
+    LET vUniqueKey = Hash128('$(vThreadInteractionCutoffTime)');
+    
+    IF $(vIncrementalQVDsAvailable)=1 THEN
+    	LET vISO_8601_Date_Range = '&filter=updatedAt%20ge%20%22' & Left(Date(TimeStamp('$(vIncrementalStartTimeThreadInteractions)'),'YYYY-MM-DD'),10) & 'T' & Right('0' & Timestamp('$(vIncrementalStartTimeThreadInteractions)','MM/DD/YYYY hh:mm:ss'),8) & 'Z%22';
+    ELSE
+    	LET vISO_8601_Date_Range = '&filter=updatedAt%20ge%20%22' & Left(Date(TimeStamp('$(vInitialDaysBack)'),'YYYY-MM-DD'),10) & 'T' & Right('0' & Timestamp('$(vInitialDaysBack)','MM/DD/YYYY hh:mm:ss'),8) & 'Z%22';
+    END IF
 
     LET vCounter = 0;
     
-    FOR i=0 TO NoOfRows('Threads')-1
+    FOR i=0 TO NoOfRows('Assistants')-1
     
-    	SET vParams = 'limit=100';
-    	LET vThreadID = Peek('ThreadID',$(i),'Threads');
-        LET vAssistantID = Lookup('AssistantID','ThreadID','$(vThreadID)','Threads');
+    	LET vNextURL = '';
+    	LET vAssistantID = Peek('AssistantID',$(i),'Assistants');
+        LET vAssistantHasKB = Lookup('Check','AssistantID','$(vAssistantID)','AssistantID_HasKnowledgeBase');
+        LET vAssistantSpaceType = Lookup('AssistantSpaceType','AssistantID','$(vAssistantID)','Assistants');
+        // 403 forbidden on personal assistants of non-executing user regardless of Tenant-level roles/permissions
+        // The below will fetch the personal space interactions of the executing user and all other shared space interactions for any user
+        // for any assistant that has a KB (interactions on assistants that no longer have KBs attached throws an error)
+        LET vAssistantIsNotOtherUserPersonal = '$(vAssistantSpaceType)'<>'Personal' OR ApplyMap('Map_UserID_UserSubject',Lookup('AssistantOwnerID','AssistantID','$(vAssistantID)','Assistants'),Null())=GetUserAttr('userSubject');
+        
+        // IF '$(vAssistantHasKB)' = '1' AND $(vAssistantIsNotOtherUserPersonal) THEN 	// 403 bug on owners' personal space https://qlik-dev.atlassian.net/browse/QANS-704
+        IF '$(vAssistantHasKB)' = '1' AND '$(vAssistantSpaceType)'<>'Personal' THEN 	// Remove this line and switch to line above once resolved
 
-        DO
+            DO
+				
+                LET vAPICallCounter = $(vAPICallCounter) + 1;
 
-            LET vAPICallCounter = $(vAPICallCounter) + 1;
+                LIB CONNECT TO '$(vu_rest_connection)';
 
-            LIB CONNECT TO '$(vu_rest_connection)';
-
-            RestConnectorMasterTable:
-            SQL SELECT 
-                "__KEY_root",
-                (SELECT 
-                    "id" AS "id_u0",
-                    "request",
-                    "response",
-                    "createdAt",
-                    "updatedAt",
-                    "__KEY_data",
-                    "__FK_data",
+                RestConnectorMasterTable:
+                SQL SELECT 
+                    "__KEY_root",
                     (SELECT 
-                        "id",
-                        "vote",
-                        "comment",
-                        "reason",
-                        "reviewStatus",
-                        "reviewerId",
-                        "reviewedAt",
-                        "__FK_feedback"
-                    FROM "feedback" FK "__FK_feedback"),
-                    (SELECT 
-                        "knowledgebaseId",
-                        "datasourceId",
-                        "documentId",
-                        "source",
-                        "lastIndexed",
-                        "__KEY_sources",
-                        "__FK_sources",
+                        "id" AS "id_u0",
+                        "request",
+                        "response",
+                        "createdAt",
+                        "updatedAt",
+                        "ownerId",
+                        "threadId",
+                        "__KEY_data",
+                        "__FK_data",
                         (SELECT 
-                            "chunkId",
-                            "__FK_chunks"
-                        FROM "chunks" FK "__FK_chunks")
-                    FROM "sources" PK "__KEY_sources" FK "__FK_sources")
-                FROM "data" PK "__KEY_data" FK "__FK_data"),
-                (SELECT 
-                    "__FK_meta"
-                FROM "meta" FK "__FK_meta"),
-                (SELECT 
-                    "__KEY_links",
-                    "__FK_links",
+                            "id",
+                            "vote",
+                            "comment",
+                            "reason",
+                            "reviewStatus",
+                            "reviewerId",
+                            "reviewedAt",
+                            "__FK_feedback"
+                        FROM "feedback" FK "__FK_feedback"),
+                        (SELECT 
+                            "knowledgebaseId",
+                            "datasourceId",
+                            "documentId",
+                            "source",
+                            "__KEY_sources",
+                            "__FK_sources",
+                            (SELECT 
+                                "chunkId",
+                                "__FK_chunks"
+                            FROM "chunks" FK "__FK_chunks")
+                        FROM "sources" PK "__KEY_sources" FK "__FK_sources")
+                    FROM "data" PK "__KEY_data" FK "__FK_data"),
                     (SELECT 
-                        "href",
-                        "__FK_self"
-                    FROM "self" FK "__FK_self"),
+                        "countTotal",
+                        "__FK_meta"
+                    FROM "meta" FK "__FK_meta"),
                     (SELECT 
-                        "href" AS "href_u0",
-                        "__FK_next"
-                    FROM "next" FK "__FK_next")
-                FROM "links" PK "__KEY_links" FK "__FK_links")
-            FROM JSON (wrap on) "root" PK "__KEY_root"
-            WITH CONNECTION (  
-              URL "https://$(vu_tenant_fqdn)/api/v1/assistants/$(vAssistantID)/threads/$(vThreadID)/interactions?$(vParams)"
-            );
-
-            [ThreadInteractionFeedback]:
-            LOAD DISTINCT
-            	[id] AS ThreadInteractionFeedbackID,
-                If([vote]=-1,'Dislike','Like') AS ThreadInteractionFeedbackVote,
-                [comment] AS ThreadInteractionFeedbackComment,
-                Capitalize(If(Len(Trim(reason))>0,reason,null())) AS ThreadInteractionFeedbackReason,
-                Capitalize([reviewStatus]) AS ThreadInteractionFeedbackStatus,
-                [reviewerId] AS ThreadInteractionFeedbackReviewerID,
-                If(Len(reviewerId)>0,ApplyMap('Map_UserID_UserName',reviewerId,'[Deleted]'),Null()) AS ThreadInteractionFeedbackReviewerName,
-                TimeStamp(reviewedAt + $(vTimeDiffFromGMT)) AS ThreadInteractionFeedbackReviewedTime,
-                [__FK_feedback] & '|' & $(vCounter) AS _KeyThreadInteractions
-            RESIDENT RestConnectorMasterTable
-            WHERE NOT IsNull([__FK_feedback]);
-
-            [ThreadInteractionChunks]:
-            LOAD DISTINCT
-            	[chunkId] AS ThreadInteractionChunkID,
-                [__FK_chunks] & '|' & $(vCounter) AS _KeyThreadInteractionSources
-            RESIDENT RestConnectorMasterTable
-            WHERE NOT IsNull([__FK_chunks]);
-
-            [ThreadInteractionSources]:
-            LOAD DISTINCT
-            	If(ApplyMap('Map_KnowledgeBaseDataSourceID_Exists',datasourceId,Null())=1,datasourceId,'[Not Found]') & '|' & If(ApplyMap('Map_KnowledgeBaseID_Exists',knowledgebaseId,Null())=1,knowledgebaseId,'[Not Found]') AS _KeyDataSourceKBLink,
-            	[knowledgebaseId] AS ThreadInteractionKnowledgeBaseID,
-                ApplyMap('Map_KnowledgeBaseID_KnowledgeBaseName',[knowledgebaseId],'[Not Found]') AS ThreadInteractionKnowledgeBaseName,
-                [datasourceId] AS ThreadInteractionDataSourceID,
-                'True' AS DocumentIsReferenced,
-                //datasourceId AS KnowledgeBaseDataSourceID,
-                [documentId] AS ThreadInteractionDocumentID,
-                [source] AS ThreadInteractionSource,
-                If(ApplyMap('Map_KnowledgeBaseDataSourceID_Exists',datasourceId,Null())=1,datasourceId,'[Not Found]') & '|' & [source] AS _DocKey,
-                TimeStamp(lastIndexed + $(vTimeDiffFromGMT)) AS ThreadInteractionSourceLastIndexedTime,
-                [__KEY_sources] & '|' & $(vCounter) AS _KeyThreadInteractionSources,
-                [__FK_sources] & '|' & $(vCounter) AS _KeyThreadInteractions
-            RESIDENT RestConnectorMasterTable
-            WHERE NOT IsNull([__FK_sources]);
+                        "__KEY_links",
+                        "__FK_links",
+                        (SELECT 
+                            "href",
+                            "__FK_self"
+                        FROM "self" FK "__FK_self"),
+                        (SELECT 
+                            "href" AS "href_u0",
+                            "__FK_next"
+                        FROM "next" FK "__FK_next")
+                    FROM "links" PK "__KEY_links" FK "__FK_links")
+                FROM JSON (wrap on) "root" PK "__KEY_root"
+                WITH CONNECTION (  
+                  URL "https://$(vu_tenant_fqdn)/api/v1/assistants/$(vAssistantID)/interactions?limit=100$(vISO_8601_Date_Range)$(vNextURL)"
+                );
             
-            CONCATENATE (LinkDataSourceKB)
-            LOAD DISTINCT
-            	If(ApplyMap('Map_KnowledgeBaseDataSourceID_Exists',datasourceId,Null())=1,datasourceId,'[Not Found]') & '|' & If(ApplyMap('Map_KnowledgeBaseID_Exists',knowledgebaseId,Null())=1,knowledgebaseId,'[Not Found]') AS _KeyDataSourceKBLink,
-            	If(ApplyMap('Map_KnowledgeBaseID_Exists',knowledgebaseId,Null())=1,knowledgebaseId,'[Not Found]') AS KnowledgeBaseID,
-                If(ApplyMap('Map_KnowledgeBaseDataSourceID_Exists',datasourceId,Null())=1,datasourceId,'[Not Found]') AS KnowledgeBaseDataSourceID
-            RESIDENT RestConnectorMasterTable
-            WHERE NOT IsNull([__FK_sources]);
+                [ThreadInteractionFeedback]:
+                LOAD	
+                    [id] AS ThreadInteractionFeedbackID,
+                    If([vote]=-1,'Dislike','Like') AS ThreadInteractionFeedbackVote,
+                    [comment] AS ThreadInteractionFeedbackComment,
+                    Capitalize(If(Len(Trim(reason))>0,reason,null())) AS ThreadInteractionFeedbackReason,
+                    Capitalize([reviewStatus]) AS ThreadInteractionFeedbackStatus,
+                    [reviewerId] AS ThreadInteractionFeedbackReviewerID,
+                    TimeStamp(reviewedAt) AS ThreadInteractionFeedbackReviewedTime,
+                    [__FK_feedback] & '|' & $(vCounter) & '|' & '$(vUniqueKey)' AS _KeyThreadInteractions
+                RESIDENT RestConnectorMasterTable
+                WHERE NOT IsNull([__FK_feedback])
+                AND [vote]<>0;
 
-            [ThreadInteractions]:
-            LOAD DISTINCT
-            	[id_u0] AS ThreadInteractionID,
-                '$(vThreadID)' AS ThreadID,
-                [request] AS ThreadInteractionQuestion,
-                [response] AS ThreadInteractionAnswer,
-                Dual(Text(Time(TimeStamp(createdAt + $(vTimeDiffFromGMT)),'h TT')),Hour(TimeStamp(createdAt + $(vTimeDiffFromGMT)))) AS ThreadInteractionHourAMPM,
-                TimeStamp(createdAt + $(vTimeDiffFromGMT)) AS ThreadInteractionTime,
-                Date(Floor(Timestamp(Timestamp([createdAt]) + $(vTimeDiffFromGMT)))) AS ThreadInteractionDate,
-                TimeStamp(updatedAt + $(vTimeDiffFromGMT)) AS ThreadInteractionUpdatedTime,
-                Date(Floor(Timestamp(Timestamp([updatedAt]) + $(vTimeDiffFromGMT)))) AS ThreadInteractionUpdatedDate,
-                [__KEY_data] & '|' & $(vCounter)  AS _KeyThreadInteractions
-            RESIDENT RestConnectorMasterTable
-            WHERE NOT IsNull([__FK_data])
-            AND TimeStamp(createdAt) >= TimeStamp('$(vInitialDaysBack)')
-            AND TimeStamp(createdAt) <= TimeStamp('$(vThreadInteractionCutoffTime)'); // Need this as iterating over each thread interaction takes time and more thread interactions come in throughout
+                [ThreadInteractionChunks]:
+                LOAD DISTINCT
+                    [chunkId] AS ThreadInteractionChunkID,
+                    [__FK_chunks] & '|' & $(vCounter) & '|' & '$(vUniqueKey)' AS _KeyThreadInteractionSources
+                RESIDENT RestConnectorMasterTable
+                WHERE NOT IsNull([__FK_chunks]);
 
-            [NextURL]:
-            LOAD	
-            	[href_u0] AS [NextURL]
-            RESIDENT RestConnectorMasterTable
-            WHERE NOT IsNull([__FK_next]);
+                [ThreadInteractionSources]:
+                LOAD DISTINCT
+                    [knowledgebaseId] AS ThreadInteractionKnowledgeBaseID,
+                    [datasourceId] AS ThreadInteractionDataSourceID,
+                    'True' AS DocumentIsReferenced,
+                    [documentId] AS ThreadInteractionDocumentID,
+                    [source] AS ThreadInteractionSource,
+                    [__KEY_sources] & '|' & $(vCounter) & '|' & '$(vUniqueKey)' AS _KeyThreadInteractionSources,
+                    [__FK_sources] & '|' & $(vCounter) & '|' & '$(vUniqueKey)' AS _KeyThreadInteractions
+                RESIDENT RestConnectorMasterTable
+                WHERE NOT IsNull([__FK_sources]);
 
-            DROP TABLE RestConnectorMasterTable;
+                [ThreadInteractions]:
+                LOAD DISTINCT
+                    [id_u0] AS ThreadInteractionID,
+                    [id_u0] AS _IncrementalThreadInteractionID,
+                    [threadId] AS ThreadID,
+                    [request] AS ThreadInteractionQuestion,
+                    [response] AS ThreadInteractionAnswer,
+                    TimeStamp(createdAt) AS ThreadInteractionTime,
+                    TimeStamp(updatedAt) AS ThreadInteractionUpdatedTime,
+                    [__KEY_data] & '|' & $(vCounter) & '|' & '$(vUniqueKey)' AS _KeyThreadInteractions
+                RESIDENT RestConnectorMasterTable
+                WHERE NOT IsNull([__FK_data])
+                AND TimeStamp(createdAt) >= TimeStamp('$(vInitialDaysBack)')
+                AND TimeStamp(updatedAt) <= TimeStamp('$(vThreadInteractionCutoffTime)'); // Need this as iterating over each thread interaction takes time and more thread interactions come in throughout
 
-            LET vParams = SubField(Peek('NextURL',0,'NextURL'),'?',-1);
-            LET vNextExists = Len('$(vParams)')>0;
+                [NextURL]:
+                LOAD	
+                    [href_u0] AS [NextURL]
+                RESIDENT RestConnectorMasterTable
+                WHERE NOT IsNull([__FK_next]);
 
-            DROP TABLE NextURL;
+                DROP TABLE RestConnectorMasterTable;
 
-            LET vCounter = $(vCounter) + 1;
+                LET vParams = SubField(Peek('NextURL',0,'NextURL'),'?',-1);
+                LET vNextExists = Len('$(vParams)')>0;
+                
+                LET vNextURL = TextBetween(Peek('NextURL',0,'NextURL'),'&next=',Null());
 
-        LOOP WHILE $(vNextExists);
+                IF SubStringCount('$(vNextURL)','&') >= 1 THEN
+                    LET vNextURL = TextBetween('$(vNextURL)',Null(),'&');
+                END IF
+
+                LET vNextURL = '&next=' & '$(vNextURL)';
+
+                LET vNextURLRows = NoOfRows('NextURL');
+
+                LET vCounter = $(vCounter) + 1;
+                
+                DROP TABLE NextURL;
+
+            LOOP WHILE $(vNextExists)
+            
+        END IF
         
     NEXT i
+        
+    // For incremental
+    LEFT JOIN (ThreadInteractionFeedback)
+    LOAD DISTINCT 
+    	_KeyThreadInteractions,
+        _IncrementalThreadInteractionID
+    RESIDENT ThreadInteractions;
+    
+    LEFT JOIN (ThreadInteractionSources)
+    LOAD DISTINCT 
+    	_KeyThreadInteractions,
+        _IncrementalThreadInteractionID
+    RESIDENT ThreadInteractions;
+    
+    LEFT JOIN (ThreadInteractionChunks)
+    LOAD DISTINCT 
+    	_KeyThreadInteractionSources,
+        _IncrementalThreadInteractionID
+    RESIDENT ThreadInteractionSources;
 
 END SUB
-
 ///$tab Audit Query Executed
 SUB get_audit_query_executed
 
@@ -1855,6 +1919,7 @@ SUB get_audit_query_executed
             "__KEY_root",
             (SELECT 
                 "eventTime",
+                "eventId",
                 "userId",
                 "__KEY_data",
                 "__FK_data",
@@ -1893,6 +1958,7 @@ SUB get_audit_query_executed
         LOAD	
             [eventTime] AS AuditQueryTime,
             [userId] AS AuditQueryUserID,
+            [eventId] AS AuditQueryEventID,
             [__KEY_data] & '|' & $(vCounter) & '|' & '$(vUniqueKey)' AS _KeyAuditQueryKeyData
         RESIDENT RestConnectorMasterTable
         WHERE NOT IsNull([__FK_data]);
@@ -1914,9 +1980,11 @@ SUB get_audit_query_executed
 
         AuditQueryInteractionIDs:
         LOAD	
-            [interactionId] AS AuditQueryInteractionID,
+            If(
+            	Len([interactionId])>0,[interactionId],
+                '|' & Lookup('AuditQueryEventID','_KeyAuditQueryKeyData',Lookup('_KeyAuditQueryKeyData','_KeyAuditQueryKeyData0',Lookup('_KeyAuditQueryKeyData0','_KeyAuditQueryKeyTrace',[__FK_result] & '|' & $(vCounter) & '|' & '$(vUniqueKey)','AuditQueryTrace'),'AuditQueryAssistantIDs'),'AuditQueryEvents')
+			) AS AuditQueryInteractionID, // Using the EventID in place of the null interaction Ids for errors -- pipe is used to distinguish that it was working and is autonumbered later on
             [rejectionCategory] AS AuditQueryRejectionCategory,
-            [interactionId] AS _IncrementalAuditQueryInteraction,
             [__FK_result] & '|' & $(vCounter) & '|' & '$(vUniqueKey)' AS _KeyAuditQueryKeyTrace
         RESIDENT RestConnectorMasterTable
         WHERE NOT IsNull([__FK_result]);
@@ -1944,7 +2012,7 @@ SUB get_audit_query_executed
         LET vCounter = $(vCounter) + 1;
         
     LOOP WHILE $(vNextURLRows)>0;
-    
+        
     LEFT JOIN (AuditQueryEvents)
     LOAD * RESIDENT AuditQueryAssistantIDs;
     
@@ -1952,7 +2020,10 @@ SUB get_audit_query_executed
     LOAD * RESIDENT AuditQueryTrace;
     
     LEFT JOIN (AuditQueryEvents)
-    LOAD * RESIDENT AuditQueryInteractionIDs;
+    LOAD 
+    	*,
+        AuditQueryInteractionID AS _IncrementalAuditQueryInteraction
+    RESIDENT AuditQueryInteractionIDs;
     
     RENAME TABLE AuditQueryEvents TO TEMP;
     
@@ -1980,13 +2051,17 @@ SUB incremental
 
     IF $(vIncrementalQVDsAvailable)=1 THEN 
     
+        ///////////////////////
+        /////////// Increment Audit Query Events
+        ///////////////////////
+    
         Map_IncrementalAuditQueryMap:
         MAPPING LOAD DISTINCT
             _IncrementalAuditQueryInteraction,
             1
         RESIDENT AuditQueryEvents;
         
-		LET qvd_name = '$(vOutputQVDName(AuditQueryEvents,$(app_version)))';
+		LET qvd_name = '$(vOutputQVDName(AuditQueryEvents,$(app_schema_version)))';
 
         TRACE Looking to load: $(qvd_name).;
         LET file_size = If(IsNull(FileSize('$(qvd_name)')),0,FileSize('$(qvd_name)'));
@@ -2013,45 +2088,238 @@ SUB incremental
             TRACE Could not find file: $(qvd_name).;
             
         END IF
-                
+        
+        ///////////////////////
+        /////////// Increment Thread Interactions
+        ///////////////////////
+        
+        Map_IncrementalThreadInteractionIDMap:
+        MAPPING LOAD DISTINCT
+            _IncrementalThreadInteractionID,
+            1
+        RESIDENT ThreadInteractions;
+        
+		LET qvd_name = '$(vOutputQVDName(ThreadInteractions,$(app_schema_version)))';
+
+        TRACE Looking to load: $(qvd_name).;
+        LET file_size = If(IsNull(FileSize('$(qvd_name)')),0,FileSize('$(qvd_name)'));
+
+        IF file_size > 0 THEN
+        
+            TRACE File size is $(file_size) bytes;
+            TRACE Fetching data from: $(qvd_name);
+            
+            CONCATENATE(ThreadInteractions)
+            LOAD DISTINCT 
+                * 
+            FROM '$(qvd_name)'(qvd)
+            WHERE ApplyMap('Map_IncrementalThreadInteractionIDMap',_IncrementalThreadInteractionID)<>1
+            AND ThreadInteractionTime >= Date('$(vMaxQuestionAge)');
+            
+            TRACE Storing: $(qvd_name).;
+            STORE ThreadInteractions INTO [$(qvd_name)] (qvd);
+
+            LET file_size_ThreadInteractions = FileSize('$(qvd_name)');
+            
+            Map_ThreadInteractionsAll:
+            MAPPING LOAD DISTINCT
+            	ThreadInteractionID,
+                1
+            RESIDENT ThreadInteractions;
+            
+        ELSE
+        
+            TRACE Could not find file: $(qvd_name).;
+            
+        END IF
+        
+        ///////////////////////
+        /////////// Increment all of the associated tables to ThreadInteractions
+        ///////////////////////
+        
+    	FOR EACH table IN 'ThreadInteractionSources','ThreadInteractionFeedback','ThreadInteractionChunks'
+       
+            LET qvd_name = '$(vOutputQVDName($(table),$(app_schema_version)))';
+
+            TRACE Looking to load: $(qvd_name).;
+            LET file_size = If(IsNull(FileSize('$(qvd_name)')),0,FileSize('$(qvd_name)'));
+
+            IF file_size > 0 THEN
+
+                TRACE File size is $(file_size) bytes;
+                TRACE Fetching data from: $(qvd_name);
+
+                CONCATENATE($(table))
+                LOAD DISTINCT 
+                    * 
+                FROM '$(qvd_name)'(qvd)
+                WHERE ApplyMap('Map_IncrementalThreadInteractionIDMap',_IncrementalThreadInteractionID)<>1
+                AND ApplyMap('Map_ThreadInteractionsAll',_IncrementalThreadInteractionID)=1; // gets rid of questions beyond max qvd age
+
+                TRACE Storing: $(qvd_name).;
+                STORE $(table) INTO [$(qvd_name)] (qvd);
+
+                LET file_size_$(table) = FileSize('$(qvd_name)');
+
+            ELSE
+
+                TRACE Could not find file: $(qvd_name).;
+
+            END IF
+        
+        NEXT table
+     
     ELSE
     
-		LET qvd_name = '$(vOutputQVDName(AuditQueryEvents,$(app_version)))';
+    	FOR EACH file IN 'AuditQueryEvents','ThreadInteractions','ThreadInteractionSources','ThreadInteractionFeedback','ThreadInteractionChunks'
+    
+            LET qvd_name = '$(vOutputQVDName($(file),$(app_schema_version)))';
 
-        TRACE Storing: $(qvd_name).;
-        STORE AuditQueryEvents INTO [$(qvd_name)] (qvd);
+            TRACE Storing: $(qvd_name).;
+            STORE $(file) INTO [$(qvd_name)] (qvd);
+
+            LET file_size_$(file) = FileSize('$(qvd_name)');
         
-        LET file_size_AuditQueryEvents = FileSize('$(qvd_name)');
+		NEXT file
         
     END IF;
+    
+    DROP FIELD _IncrementalThreadInteractionID;
 
 END SUB
 ///$tab Transform
 SUB transform
 
+	///////////////////////
+    /////////// Load multi-tenant maps
     ///////////////////////
+    
+    // Required for multi-tenant support
+    MultiTenantMap_KnowledgeBaseDataSourceID_Exists:
+    MAPPING LOAD DISTINCT
+    	*
+    RESIDENT KnowledgeBaseDataSourceID_Exists;
+    
+    DROP TABLE KnowledgeBaseDataSourceID_Exists;
+    
+    // Required for multi-tenant support
+    MultiTenantMap_KnowledgeBaseID_Exists:
+    MAPPING LOAD DISTINCT
+    	*
+    RESIDENT KnowledgeBaseID_Exists;
+    
+    DROP TABLE KnowledgeBaseID_Exists;
+    
+    // Required for multi-tenant support
+    MultiTenantMap_KnowledgeBaseID_KnowledgeBaseName:
+    MAPPING LOAD DISTINCT
+    	*
+    RESIDENT KnowledgeBaseID_KnowledgeBaseName;
+    
+    DROP TABLE KnowledgeBaseID_KnowledgeBaseName;
+    
+    // Required for multi-tenant support
+    MultiTenantMap_UserID_UserName:
+    MAPPING LOAD DISTINCT
+    	*
+    RESIDENT UserID_UserName;
+    
+    DROP TABLE UserID_UserName;
+    
+    // Required for multi-tenant support
+    MultiTenantMap_UserID_UserEmail:
+    MAPPING LOAD DISTINCT
+    	*
+    RESIDENT UserID_UserEmail;
+    
+    DROP TABLE UserID_UserEmail;
+    
+	///////////////////////
+    /////////// Construct link table for KB and Data sources
+    ///////////////////////
+    
+    RENAME TABLE ThreadInteractionSources TO TEMP;
+    
+    ThreadInteractionSources:
+    LOAD DISTINCT
+    	*,
+        If(ApplyMap('MultiTenantMap_KnowledgeBaseDataSourceID_Exists',ThreadInteractionDataSourceID,Null())=1,ThreadInteractionDataSourceID,'[Not Found]') & '|' & If(ApplyMap('MultiTenantMap_KnowledgeBaseID_Exists',ThreadInteractionKnowledgeBaseID,Null())=1,ThreadInteractionKnowledgeBaseID,'[Not Found]') AS _KeyDataSourceKBLink,
+    	ApplyMap('MultiTenantMap_KnowledgeBaseID_KnowledgeBaseName',ThreadInteractionKnowledgeBaseID,'[Not Found]') AS ThreadInteractionKnowledgeBaseName,
+        If(ApplyMap('MultiTenantMap_KnowledgeBaseDataSourceID_Exists',ThreadInteractionDataSourceID,Null())=1,ThreadInteractionDataSourceID,'[Not Found]') & '|' & ThreadInteractionSource AS _DocKey
+    RESIDENT TEMP;
+    
+    DROP TABLE TEMP;
+
+    CONCATENATE (LinkDataSourceKB)
+    LOAD DISTINCT
+        If(ApplyMap('MultiTenantMap_KnowledgeBaseDataSourceID_Exists',ThreadInteractionDataSourceID,Null())=1,ThreadInteractionDataSourceID,'[Not Found]') & '|' & If(ApplyMap('MultiTenantMap_KnowledgeBaseID_Exists',ThreadInteractionKnowledgeBaseID,Null())=1,ThreadInteractionKnowledgeBaseID,'[Not Found]') AS _KeyDataSourceKBLink,
+        If(ApplyMap('MultiTenantMap_KnowledgeBaseID_Exists',ThreadInteractionKnowledgeBaseID,Null())=1,ThreadInteractionKnowledgeBaseID,'[Not Found]') AS KnowledgeBaseID,
+        If(ApplyMap('MultiTenantMap_KnowledgeBaseDataSourceID_Exists',ThreadInteractionDataSourceID,Null())=1,ThreadInteractionDataSourceID,'[Not Found]') AS KnowledgeBaseDataSourceID
+    RESIDENT ThreadInteractionSources
+    WHERE Len(ThreadInteractionDataSourceID)>0;
+
+	///////////////////////
     /////////// Filter down tables to only include thread interactions that are greater than the initial days back to scan
+    /////////// and apply GMT shifts. In addition, update mapping in case assistants/kbs have been deleted
     ///////////////////////
     
     Map_ThreadIDs_TimeFilter:
     MAPPING LOAD DISTINCT
     	ThreadID,
-        1
+        1 AS ThreadIDTimeFilter
     RESIDENT ThreadInteractions;
+    
+    Map_AssistantExists:
+    MAPPING LOAD DISTINCT
+    	AssistantID,
+        1 AS AssistantExists
+    RESIDENT Assistants;
+        
+    Map_ThreadID_AssistantExists:
+    MAPPING LOAD DISTINCT
+    	ThreadID,
+        1 AS ThreadIDAssistantExists
+    RESIDENT Threads
+    WHERE ApplyMap('Map_AssistantExists',AssistantID,Null())=1;
+        
+    RENAME TABLE ThreadInteractions TO TEMP;
+    
+    ThreadInteractions:
+    LOAD DISTINCT
+        _KeyThreadInteractions,
+        If(ApplyMap('Map_ThreadID_AssistantExists',ThreadID,Null())=1,ThreadID,'[Unknown - Assistant Not Found]') AS ThreadID,
+        ThreadInteractionID,
+        If(ApplyMap('Map_ThreadID_AssistantExists',ThreadID,Null())=1,ThreadInteractionQuestion,'[Unknown - Assistant Not Found]') AS ThreadInteractionQuestion,
+        If(ApplyMap('Map_ThreadID_AssistantExists',ThreadID,Null())=1,ThreadInteractionAnswer,'[Unknown - Assistant Not Found]') AS ThreadInteractionAnswer,
+        Dual(Text(Time(TimeStamp(ThreadInteractionTime + $(vTimeDiffFromGMT)),'h TT')),Hour(TimeStamp(ThreadInteractionTime + $(vTimeDiffFromGMT)))) AS ThreadInteractionHourAMPM,
+        TimeStamp(ThreadInteractionTime + $(vTimeDiffFromGMT)) AS ThreadInteractionTime,
+        Date(Floor(Timestamp(Timestamp(ThreadInteractionTime) + $(vTimeDiffFromGMT)))) AS ThreadInteractionDate,
+        TimeStamp(ThreadInteractionUpdatedTime + $(vTimeDiffFromGMT)) AS ThreadInteractionUpdatedTime,
+        Date(Floor(Timestamp(Timestamp(ThreadInteractionUpdatedTime) + $(vTimeDiffFromGMT)))) AS ThreadInteractionUpdatedDate
+    RESIDENT TEMP;
+    
+    DROP TABLE TEMP;
     
     RENAME TABLE ThreadInteractionSources TO TEMP;
 
 	ThreadInteractionSources:
     LEFT KEEP(ThreadInteractions)
-    LOAD * RESIDENT TEMP;
+    LOAD DISTINCT * RESIDENT TEMP;
     
     DROP TABLE TEMP;
     
     RENAME TABLE ThreadInteractionFeedback TO TEMP;
+    RENAME FIELD ThreadInteractionFeedbackReviewedTime TO ThreadInteractionFeedbackReviewedTimeTemp;
 
 	ThreadInteractionFeedback:
     LEFT KEEP(ThreadInteractions)
-    LOAD * RESIDENT TEMP;
+    LOAD DISTINCT 
+    	*,
+        TimeStamp(ThreadInteractionFeedbackReviewedTimeTemp + $(vTimeDiffFromGMT)) AS ThreadInteractionFeedbackReviewedTime,
+        If(Len(ThreadInteractionFeedbackReviewerID)>0,ApplyMap('MultiTenantMap_UserID_UserName',ThreadInteractionFeedbackReviewerID,'[Deleted]'),Null()) AS ThreadInteractionFeedbackReviewerName
+    RESIDENT TEMP;
+    
+    DROP FIELD ThreadInteractionFeedbackReviewedTimeTemp;
     
     DROP TABLE TEMP;
     
@@ -2059,7 +2327,7 @@ SUB transform
 
 	ThreadInteractionChunks:
     LEFT KEEP(ThreadInteractions)
-    LOAD * RESIDENT TEMP;
+    LOAD DISTINCT * RESIDENT TEMP;
     
     DROP TABLE TEMP;
     
@@ -2067,7 +2335,7 @@ SUB transform
 
 	LinkDataSourceKB:
     LEFT KEEP(ThreadInteractions)
-    LOAD * RESIDENT TEMP;
+    LOAD DISTINCT * RESIDENT TEMP;
     
     DROP TABLE TEMP;
     
@@ -2083,7 +2351,7 @@ SUB transform
     DROP TABLE TEMP;
     
     ///////////////////////
-    /////////// TACK ON QUESTIONS ON DELETED ASSISTANTS
+    /////////// TACK ON QUESTIONS ON NOT FOUND IN THREAD INTERACTIONS (from Audits Events, e.g., questions on personal/deleted assistants)
     ///////////////////////
     
     LEFT JOIN (ThreadInteractions)
@@ -2092,17 +2360,11 @@ SUB transform
         AuditQueryRejectionCategory AS ThreadInteractionRejectionCategory
     RESIDENT AuditQueryEvents;
 
-    Map_ThreadInteractionID_AssistantExists:
+    Map_ThreadInteractionID_ExistsInThreads:
     MAPPING LOAD DISTINCT
     	ThreadInteractionID,
-        1
+        1 AS ThreadInteractionIDAssistantExists
     RESIDENT ThreadInteractions;
-    
-    Map_AssistantID_Exists:
-    MAPPING LOAD DISTINCT
-    	AssistantID,
-        1
-    RESIDENT Assistants;
     
     CONCATENATE(ThreadInteractions)
     LOAD DISTINCT
@@ -2110,50 +2372,42 @@ SUB transform
         Timestamp(Timestamp(AuditQueryTime) + $(vTimeDiffFromGMT)) AS ThreadInteractionTime,
         AuditQueryRejectionCategory AS ThreadInteractionRejectionCategory,
         Dual(Text(Time(TimeStamp(AuditQueryTime + $(vTimeDiffFromGMT)),'h TT')),Hour(TimeStamp(AuditQueryTime + $(vTimeDiffFromGMT)))) AS ThreadInteractionHourAMPM,
-        If(Len(AuditQueryInteractionID)>0,AuditQueryInteractionID,AutoNumber(AuditQueryAssistantID & '|' & AuditQueryUserID & '|' & Date(Floor(Timestamp(Timestamp(AuditQueryTime) + $(vTimeDiffFromGMT)))))) AS ThreadInteractionID, // it is null if there is a platform error
-        If(Len(AuditQueryInteractionID)>0,AutoNumber(AuditQueryInteractionID),AutoNumber(AuditQueryAssistantID & '|' & AuditQueryUserID & '|' & Date(Floor(Timestamp(Timestamp(AuditQueryTime) + $(vTimeDiffFromGMT)))))) AS _KeyThreadInteractions, // have to do this to preserve counts/show conditions -- it is null if there is a platform error as well
+        AuditQueryInteractionID AS ThreadInteractionID,
+        AuditQueryInteractionID AS _KeyThreadInteractions, // have to do this to preserve counts/show conditions
         // Logic:
-        // If(ApplyMap('Map_AssistantID_Exists',AuditQueryAssistantID,Null())=1 AND Len(AuditQueryInteractionID)>0,
+        // If(ApplyMap('Map_AssistantExists',AuditQueryAssistantID,Null())=1 AND SubStringCount(AuditQueryInteractionID,'|')=0,
         // '[Unknown - Personal Assistant Found]',
         // 
-        // If(ApplyMap('Map_AssistantID_Exists',AuditQueryAssistantID,Null())=1 AND NOT Len(AuditQueryInteractionID)>0,
+        // If(ApplyMap('Map_AssistantExists',AuditQueryAssistantID,Null())=1 AND NOT SubStringCount(AuditQueryInteractionID,'|')=0,
         // '[Unknown - Platform Error]',
         // 
-        // If(ApplyMap('Map_AssistantID_Exists',AuditQueryAssistantID,Null())<>1 AND Len(AuditQueryInteractionID)>0,
+        // If(ApplyMap('Map_AssistantExists',AuditQueryAssistantID,Null())<>1 AND SubStringCount(AuditQueryInteractionID,'|')>=0,
         // '[Unknown - Assistant Not Found]',
         // 
-        // If(ApplyMap('Map_AssistantID_Exists',AuditQueryAssistantID,Null())<>1 AND NOT Len(AuditQueryInteractionID)>0,
+        // If(ApplyMap('Map_AssistantExists',AuditQueryAssistantID,Null())<>1 AND NOT SubStringCount(AuditQueryInteractionID,'|')=0,
         // '[Unknown - Platform Error on Unknown Assistant]'
-        If(ApplyMap('Map_AssistantID_Exists',AuditQueryAssistantID,Null())=1 AND Len(AuditQueryInteractionID)>0,'[Unknown - Personal Assistant]',If(ApplyMap('Map_AssistantID_Exists',AuditQueryAssistantID,Null())=1 AND NOT Len(AuditQueryInteractionID)>0,'[Unknown - Platform Error]',If(ApplyMap('Map_AssistantID_Exists',AuditQueryAssistantID,Null())<>1 AND Len(AuditQueryInteractionID)>0,'[Unknown - Assistant Not Found]',If(ApplyMap('Map_AssistantID_Exists',AuditQueryAssistantID,Null())<>1 AND NOT Len(AuditQueryInteractionID)>0,'[Unknown - Platform Error on Unknown Assistant]')))) AS ThreadInteractionQuestion,
-        If(ApplyMap('Map_AssistantID_Exists',AuditQueryAssistantID,Null())=1 AND Len(AuditQueryInteractionID)>0,'[Unknown - Personal Assistant]',If(ApplyMap('Map_AssistantID_Exists',AuditQueryAssistantID,Null())=1 AND NOT Len(AuditQueryInteractionID)>0,'[Unknown - Platform Error]',If(ApplyMap('Map_AssistantID_Exists',AuditQueryAssistantID,Null())<>1 AND Len(AuditQueryInteractionID)>0,'[Unknown - Assistant Not Found]',If(ApplyMap('Map_AssistantID_Exists',AuditQueryAssistantID,Null())<>1 AND NOT Len(AuditQueryInteractionID)>0,'[Unknown - Platform Error on Unknown Assistant]')))) AS ThreadInteractionAnswer,
-        Dual(If(ApplyMap('Map_AssistantID_Exists',AuditQueryAssistantID,Null())=1 AND Len(AuditQueryInteractionID)>0,'[Unknown - Personal Assistant]',If(ApplyMap('Map_AssistantID_Exists',AuditQueryAssistantID,Null())=1 AND NOT Len(AuditQueryInteractionID)>0,'[Unknown - Platform Error]',If(ApplyMap('Map_AssistantID_Exists',AuditQueryAssistantID,Null())<>1 AND Len(AuditQueryInteractionID)>0,'[Unknown - Assistant Not Found]',If(ApplyMap('Map_AssistantID_Exists',AuditQueryAssistantID,Null())<>1 AND NOT Len(AuditQueryInteractionID)>0,'[Unknown - Platform Error on Unknown Assistant]')))),AutoNumber(AuditQueryAssistantID & '|' & AuditQueryUserID)) AS ThreadID
+        If(ApplyMap('Map_AssistantExists',AuditQueryAssistantID,Null())=1 AND SubStringCount(AuditQueryInteractionID,'|')=0,'[Unknown - Personal Assistant]',If(ApplyMap('Map_AssistantExists',AuditQueryAssistantID,Null())=1 AND NOT SubStringCount(AuditQueryInteractionID,'|')=0,'[Unknown - Platform Error]',If(ApplyMap('Map_AssistantExists',AuditQueryAssistantID,Null())<>1 AND SubStringCount(AuditQueryInteractionID,'|')>=0,'[Unknown - Assistant Not Found]',If(ApplyMap('Map_AssistantExists',AuditQueryAssistantID,Null())<>1 AND NOT SubStringCount(AuditQueryInteractionID,'|')=0,'[Unknown - Platform Error on Unknown Assistant]')))) AS ThreadInteractionQuestion,
+        If(ApplyMap('Map_AssistantExists',AuditQueryAssistantID,Null())=1 AND SubStringCount(AuditQueryInteractionID,'|')=0,'[Unknown - Personal Assistant]',If(ApplyMap('Map_AssistantExists',AuditQueryAssistantID,Null())=1 AND NOT SubStringCount(AuditQueryInteractionID,'|')=0,'[Unknown - Platform Error]',If(ApplyMap('Map_AssistantExists',AuditQueryAssistantID,Null())<>1 AND SubStringCount(AuditQueryInteractionID,'|')>=0,'[Unknown - Assistant Not Found]',If(ApplyMap('Map_AssistantExists',AuditQueryAssistantID,Null())<>1 AND NOT SubStringCount(AuditQueryInteractionID,'|')=0,'[Unknown - Platform Error on Unknown Assistant]')))) AS ThreadInteractionAnswer,
+        Dual(If(ApplyMap('Map_AssistantExists',AuditQueryAssistantID,Null())=1 AND SubStringCount(AuditQueryInteractionID,'|')=0,'[Unknown - Personal Assistant]',If(ApplyMap('Map_AssistantExists',AuditQueryAssistantID,Null())=1 AND NOT SubStringCount(AuditQueryInteractionID,'|')=0,'[Unknown - Platform Error]',If(ApplyMap('Map_AssistantExists',AuditQueryAssistantID,Null())<>1 AND SubStringCount(AuditQueryInteractionID,'|')>=0,'[Unknown - Assistant Not Found]',If(ApplyMap('Map_AssistantExists',AuditQueryAssistantID,Null())<>1 AND NOT SubStringCount(AuditQueryInteractionID,'|')=0,'[Unknown - Platform Error on Unknown Assistant]')))),AutoNumber(AuditQueryAssistantID & '|' & AuditQueryUserID)) AS ThreadID
     RESIDENT AuditQueryEvents
-    WHERE ApplyMap('Map_ThreadInteractionID_AssistantExists',AuditQueryInteractionID,Null())<>1;
-    
-    // Required for multi-tenant support
-    MultiTenantMap_UserID_UserName:
-    MAPPING LOAD DISTINCT
-    	*
-    RESIDENT UserID_UserName;
-    
-    DROP TABLE UserID_UserName;
+    WHERE ApplyMap('Map_ThreadInteractionID_ExistsInThreads',AuditQueryInteractionID,Null())<>1;
     
     CONCATENATE(Threads)
     LOAD DISTINCT
-		Dual(If(ApplyMap('Map_AssistantID_Exists',AuditQueryAssistantID,Null())=1 AND Len(AuditQueryInteractionID)>0,'[Unknown - Personal Assistant]',If(ApplyMap('Map_AssistantID_Exists',AuditQueryAssistantID,Null())=1 AND NOT Len(AuditQueryInteractionID)>0,'[Unknown - Platform Error]',If(ApplyMap('Map_AssistantID_Exists',AuditQueryAssistantID,Null())<>1 AND Len(AuditQueryInteractionID)>0,'[Unknown - Assistant Not Found]',If(ApplyMap('Map_AssistantID_Exists',AuditQueryAssistantID,Null())<>1 AND NOT Len(AuditQueryInteractionID)>0,'[Unknown - Platform Error on Unknown Assistant]')))),AutoNumber(AuditQueryAssistantID & '|' & AuditQueryUserID)) AS ThreadID,
-        If(ApplyMap('Map_AssistantID_Exists',AuditQueryAssistantID,Null())=1,AuditQueryAssistantID, Dual('[Not Found]',AutoNumber(AuditQueryAssistantID))) AS AssistantID,
+		Dual(If(ApplyMap('Map_AssistantExists',AuditQueryAssistantID,Null())=1 AND SubStringCount(AuditQueryInteractionID,'|')=0,'[Unknown - Personal Assistant]',If(ApplyMap('Map_AssistantExists',AuditQueryAssistantID,Null())=1 AND NOT SubStringCount(AuditQueryInteractionID,'|')=0,'[Unknown - Platform Error]',If(ApplyMap('Map_AssistantExists',AuditQueryAssistantID,Null())<>1 AND SubStringCount(AuditQueryInteractionID,'|')>=0,'[Unknown - Assistant Not Found]',If(ApplyMap('Map_AssistantExists',AuditQueryAssistantID,Null())<>1 AND NOT SubStringCount(AuditQueryInteractionID,'|')=0,'[Unknown - Platform Error on Unknown Assistant]')))),AutoNumber(AuditQueryAssistantID & '|' & AuditQueryUserID)) AS ThreadID,
+        If(ApplyMap('Map_AssistantExists',AuditQueryAssistantID,Null())=1,AuditQueryAssistantID, Dual('[Not Found]',AutoNumber(AuditQueryAssistantID))) AS AssistantID,
         ApplyMap('MultiTenantMap_UserID_UserName',AuditQueryUserID,'[Deleted]') AS ThreadOwnerName,
         AuditQueryUserID AS ThreadOwnerID
     RESIDENT AuditQueryEvents
-    WHERE ApplyMap('Map_ThreadInteractionID_AssistantExists',AuditQueryInteractionID,Null())<>1;
+    WHERE ApplyMap('Map_ThreadInteractionID_ExistsInThreads',AuditQueryInteractionID,Null())<>1;
     
     CONCATENATE(Assistants)
     LOAD DISTINCT
     	Dual('[Not Found]',AutoNumber(AuditQueryAssistantID)) AS AssistantID,
         '[Not Found]' AS AssistantName
     RESIDENT AuditQueryEvents
-    WHERE ApplyMap('Map_ThreadInteractionID_AssistantExists',AuditQueryInteractionID,Null())<>1
-    AND ApplyMap('Map_AssistantID_Exists',AuditQueryAssistantID,Null())<>1;
+    WHERE ApplyMap('Map_ThreadInteractionID_ExistsInThreads',AuditQueryInteractionID,Null())<>1
+    AND ApplyMap('Map_AssistantExists',AuditQueryAssistantID,Null())<>1;
     
     DROP TABLE AuditQueryEvents;
 
@@ -2339,22 +2593,6 @@ SUB transform
         1
     RESIDENT ThreadInteractionSources;
     
-    // Required for multi-tenant support
-    MultiTenantMap_KnowledgeBaseDataSourceID_Exists:
-    MAPPING LOAD DISTINCT
-    	*
-    RESIDENT KnowledgeBaseDataSourceID_Exists;
-    
-    DROP TABLE KnowledgeBaseDataSourceID_Exists;
-    
-    // Required for multi-tenant support
-    MultiTenantMap_KnowledgeBaseID_Exists:
-    MAPPING LOAD DISTINCT
-    	*
-    RESIDENT KnowledgeBaseID_Exists;
-    
-    DROP TABLE KnowledgeBaseID_Exists;
-    
     // Append on all documents that were not referenced so that they can be linked to their corresponding kbs
     CONCATENATE (ThreadInteractionSources)
     LOAD DISTINCT
@@ -2363,7 +2601,6 @@ SUB transform
         'False' AS DocumentIsReferenced
     RESIDENT Documents
     WHERE ApplyMap('Map__DocKey_SourceThread_Exists',_DocKey)<>1;
-
 
     ///////////////////////
     /////////// DROP TABLES & FIELDS
@@ -2379,7 +2616,21 @@ SUB transform
         ,Spaces
         ,AssistantID_HasKnowledgeBase
         ;
+        
+    ///////////////////////
+    /////////// ADD USER EMAIL
+    ///////////////////////
+       
+    RENAME TABLE Threads TO TEMP;
     
+    Threads:
+    LOAD DISTINCT
+    	*,
+        ApplyMap('MultiTenantMap_UserID_UserEmail',ThreadOwnerID,'[Deleted]') AS ThreadOwnerEmail
+    RESIDENT TEMP;
+    
+    DROP TABLE TEMP;
+
 END SUB;
 ///$tab Calendar
 SUB calendar
@@ -2456,6 +2707,7 @@ END SUB
 SUB autonumber
 	
     AUTONUMBER "_*";
+    AUTONUMBER ThreadInteractionID;
     
 END SUB
 ///$tab Multi-Tenant
@@ -2565,13 +2817,14 @@ SET NumericalAbbreviation='3:k;6:M;9:G;12:T;15:P;18:E;21:Z;24:Y;-3:m;-6:μ;-9:n;
 LET reload_start 	= Now(1);
 SET start_msg		=; 
 SET comp			=;
-Let vTenants 		= 0;
+LET vTenants 		= 0;
 
-SET app_name		= 'Answers Analyzer';
-SET app_version		= '1.0.2';
-LET comp 			= ComputerName(); 
-LET engine_ver 		= PurgeChar(EngineVersion(),Chr(39)); 
-LET start_msg 		= 'Reloading $(app_name) $(app_version) from $(comp) running QIX Engine version $(engine_ver)';
+SET app_name			= 'Answers Analyzer';
+SET app_version			= '1.1.0';
+SET app_schema_version	= 'sv_1.0.0';
+LET comp 				= ComputerName(); 
+LET engine_ver 			= PurgeChar(EngineVersion(),Chr(39)); 
+LET start_msg 			= 'Reloading $(app_name) $(app_version) from $(comp) running QIX Engine version $(engine_ver)';
 
 Trace $(startMsg);
 
