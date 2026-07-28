@@ -3,6 +3,11 @@
 > Qlik Support for help with these apps. See below for additional information
 > on how to raise issues on this repository to ask for help.
 
+> [!WARNING]
+> This application is built for the legacy unstructured assistants for Qlik Cloud.
+> It does not support the current generation of Qlik Answers and will not provide
+> insights for new (structured and unstructured) knowledgebases and assistants.
+
 # Qlik Cloud Answers Analyzer
 
 > **Note**
@@ -15,7 +20,7 @@ The Answers Analyzer provides a comprehensive dashboard to analyze Qlik Answers 
 
 It provides the ability to:
 
-- Track user questions across knowledgebases, assistants, and source documents
+- Track user questions across legacy unstructured knowledgebases, assistants, and source documents
 - Analyze user behavior to see what types of questions users are asking about what content
 - Optimize knowledgebase sizes and increase answer accuracy by removing inaccurate, unused, and unreferenced documents
 - Track and monitor page size to quota
