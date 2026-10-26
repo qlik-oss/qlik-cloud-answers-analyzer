@@ -4,10 +4,7 @@
 > on how to raise issues on this repository to ask for help.
 
 > [!WARNING]
-> This application is built for the legacy unstructured assistants for Qlik Cloud.
-> It does not support the current generation of Qlik Answers and will not provide
-> insights for new (structured and unstructured) knowledgebases and assistants, or for
-> Qlik MCP server.
+> This application is deprecated and will be archived on or after December 10, 2026. Please migrate to the [AI Analyzer](https://github.com/qlik-oss/qlik-cloud-ai-analyzer).
 
 # Qlik Cloud Answers Analyzer
 
