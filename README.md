@@ -5,9 +5,8 @@
 
 > [!WARNING]
 > This application is built for the legacy unstructured assistants for Qlik Cloud.
-> It does not support the current generation of Qlik Answers and will not provide
-> insights for new (structured and unstructured) knowledgebases and assistants, or for
-> Qlik MCP server.
+> For the current generation of Qlik Answers (structured and unstructured) knowledgebases and assistants, or for
+> Qlik MCP server, please migrate to the [AI Analyzer](https://github.com/qlik-oss/qlik-cloud-ai-analyzer).
 
 # Qlik Cloud Answers Analyzer
 
